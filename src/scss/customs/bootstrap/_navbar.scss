@@ -1,3 +1,62 @@
 .navbar {
-  min-height: 76px;
+  padding: 0;
+}
+
+.navbar-nav {
+  flex-basis: 100%;
+
+  a {
+    white-space: nowrap;
+    color: #93a4aa;
+  }
+
+  &.justify-content-end { 
+    .dropdown-menu {
+      left: auto;
+      right: 0px;
+    }
+  }
+
+  & > .nav-item {
+    & > a {
+      line-height: 3.7rem;
+    }
+  }
+  
+  .dropdown-menu {
+    background-color: #20282a;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+  .dropdown-item {
+    padding: 0;
+    &:first-child, &:last-child {
+      border-radius: 0;
+    }
+    a {
+      padding: 0 $grid-gutter-width / 2;
+      line-height: 2rem;
+      display: block;
+    }
+    &:hover {
+      background-color: #364347;
+      a {
+        color: white;
+      }
+    }
+  }
+  .pesquisa {
+    .dropdown-menu {
+      min-width: 15rem;
+    }
+  }
+  .search-form {
+    padding: $grid-gutter-width / 3;
+    min-width: 20%;;
+  }
+  a:not([href]):not([tabindex]) {
+    color: #777;
+  }
 }
