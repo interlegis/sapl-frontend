@@ -174,38 +174,6 @@ fieldset {
   }
 }
 
-nav {
-  &.navbar {
-    margin-bottom: 0;
-    border-radius: 0;
-    font-size: 15px;
-  }
-  .navbar-nav {
-    & > li {
-      & > a {
-        padding-top: 0px;
-        padding-bottom: 0px;
-        line-height: $grid-gutter-width * 2.5;
-        &:hover {
-          background-color: $link-hover-color;
-        }
-      }
-      &:nth-child(2) {
-        & > .dropdown-menu {
-          right: auto;
-        }
-      }
-
-    }
-    &:last-child {
-      & > li:last-child {
-        a {
-          padding-right: 0px;
-        }
-      }
-    }
-  }
-}
 
 .controls-radio-checkbox, .controls-file {
   padding: 0px;
@@ -369,27 +337,8 @@ nav {
   }
 }
 
-@media (max-width: 1199px) {
-  nav {
-    .container {
-      width: auto !important;
-    }
-  }
-  .navbar-nav > li > a {
-     padding-left: $grid-gutter-width / 2.8;
-     padding-right:  $grid-gutter-width / 2.8;
-  }
-}
-
 
 @media (max-width: 1091px) {
-  .container {
-    width: auto;
-  }
-  .navbar-nav > li > a {
-     padding-left: $grid-gutter-width / 4;
-     padding-right:  $grid-gutter-width / 4;
-  }
   .masthead {
     .navbar-brand {
       font-size: 22px;
@@ -402,48 +351,15 @@ nav {
 }
 
 @media (max-width: 991px) {
-  body {
-    margin: 0;
-  }
   .footer {
     position: relative;
   }
   .caret {
     margin-left: 1px;
   }
-  .navbar-nav > li > a {
-    padding-left: 4px;
-    padding-right: 4px;
-  }
 }
 
 @media (max-width: 767px) {
-  nav {
-    .navbar-nav > li > a { 
-      line-height: 2.5;
-    }
-    .navbar-right {
-      position: absolute;
-      top: 0;
-      margin: 10px;
-      & > li {
-        vertical-align: top;
-        display: inline-block;
-        a {
-          padding-left: 10px;
-          padding-right: 10px;
-        }
-      }
-      .pesquisa.open {
-        ul {
-          position: absolute;
-        }
-      } 
-      .navbar-form {
-        margin: 8px 0;
-      }
-    }
-  }
   .table{
     width: auto;
     white-space: normal;
