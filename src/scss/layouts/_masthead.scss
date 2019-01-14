@@ -1,0 +1,38 @@
+.masthead {
+  padding: 10px;
+  .nav {
+    clear:both;
+  }
+  .navbar-brand {
+    padding: 0px;
+    color: $headings-color;
+    font-size: 24px;
+    img.img-responsive {
+      height: 95px;
+      display: inline-block;
+    }
+    small {
+      color: #93A4AA;
+      font-size: 75%;
+      line-height: 25px;
+    }
+    .vcenter {
+      display: inline-block;
+      vertical-align: middle;
+      float: none;
+      padding: 10px;
+      line-height: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 1091px) {
+  .masthead {
+    .navbar-brand {
+      font-size: 22px;
+      img.img-responsive {
+        height: 60px;
+      }
+    }
+  }
+}
