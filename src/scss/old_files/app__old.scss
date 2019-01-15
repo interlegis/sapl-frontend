@@ -12,59 +12,6 @@ body {
   margin-bottom: 160px;
 }
 
-h1, h2, h3, h4, h5, h6, form, dl, dt, dd, p, div, img, a {
-  margin: 0;
-  padding: 0;
-}
-h1, .h1 {
-  font-size: 30px;
-}
-h2, .h2 {
-  font-size: 24px;
-}
-h3, .h3 {
-  font-size: 20px;
-}
-h4, .h4 {
-  font-size: 16px;
-}
-h5, .h5 {
-  font-size: 14px;
-}
-h6, .h6 {
-  font-size: 12px;
-}
-
-p {
-  margin: 0.5em 0;
-  .control-label {
-    font-weight: bold;
-  }
-}
-
-label {
-  margin-bottom: 0;
-  line-height: 1;
-}
-
-fieldset {
-  fieldset {
-    font-size: 95%;
-    legend {
-      font-size: 18px;
-    }
-  }
-}
-
-.page-header {
-  margin: 20px 0px 10px;
-}
-
-.caret {
-  &.top {
-    transform: rotate(180deg);
-  }
-}
 
 .btn:hover, .btn:focus {
   color: inherit;
@@ -319,18 +266,6 @@ fieldset {
   .caret {
     margin-left: 1px;
   }
-}
-
-@media (max-width: 767px) {
-  .table{
-    width: auto;
-    white-space: normal;
-    display:block;
-    overflow-x: auto;
-  }
-}
-.lista-parlamentares .table td {
-  vertical-align: middle;
 }
 
 @media (min-width: 1092px) and (max-width: 1199px) {

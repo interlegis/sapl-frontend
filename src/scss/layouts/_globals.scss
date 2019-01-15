@@ -1,0 +1,41 @@
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+p {
+  margin: 0.5em 0;
+  .control-label {
+    font-weight: bold;
+  }
+}
+
+label {
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+fieldset {
+  fieldset {
+    font-size: 95%;
+    legend {
+      font-size: 18px;
+    }
+  }
+}
+
+.page-header {
+  margin: 20px 0px 10px;
+}
+
+.caret {
+  &.top {
+    transform: rotate(180deg);
+  }
+}
+
+
+.lista-parlamentares .table td {
+  vertical-align: middle;
+}
