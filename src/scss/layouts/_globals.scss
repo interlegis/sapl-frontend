@@ -1,4 +1,3 @@
-
 html {
   position: relative;
   min-height: 100%;
@@ -35,7 +34,12 @@ fieldset {
   }
 }
 
-
 .lista-parlamentares .table td {
   vertical-align: middle;
+}
+
+@media print {
+  a[href]:after {
+    content: none !important;
+  }
 }
