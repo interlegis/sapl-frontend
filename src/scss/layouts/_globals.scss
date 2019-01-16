@@ -3,6 +3,29 @@ html {
   min-height: 100%;
 }
 
+h1, h2, h3, h4, h5, h6, form, dl, dt, dd, p, div, img, a {
+  margin: 0;
+  padding: 0;
+}
+h1, .h1 {
+  font-size: 30px;
+}
+h2, .h2 {
+  font-size: 24px;
+}
+h3, .h3 {
+  font-size: 20px;
+}
+h4, .h4 {
+  font-size: 16px;
+}
+h5, .h5 {
+  font-size: 14px;
+}
+h6, .h6 {
+  font-size: 12px;
+}
+
 p {
   margin: 0.5em 0;
   .control-label {
