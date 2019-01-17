@@ -12,9 +12,14 @@ import "bootstrap";
 import 'webpack-jquery-ui/datepicker'
 import 'jquery-ui/ui/i18n/datepicker-pt-BR'
 
-window.refreshDatePicker = function() {
-  $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
-  $('.dateinput').datepicker();
-}
+import 'tinymce/tinymce'
+
+import 'tinymce/themes/modern/theme'
+import 'tinymce/plugins/table'
+import 'tinymce/plugins/code'
+import 'tinymce/plugins/save'
+
+import "./js/functions"
 
 window.refreshDatePicker();
+window.initTinymce("texto-rico");
