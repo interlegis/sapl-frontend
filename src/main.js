@@ -1,5 +1,3 @@
-import jQuery from "jquery";
-window.$ = window.jQuery = jQuery;
 
 import "@fortawesome/fontawesome-free/css/all.min.css"
 

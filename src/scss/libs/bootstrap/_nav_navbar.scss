@@ -59,6 +59,22 @@
     }
   }
 }
+.nav-pills {
+  .dropdown-menu {
+    padding: 0;
+  }
+  .dropdown-item {
+    a {
+      display: block;
+    }
+    &.active {
+      a {
+        color: white;
+      }
+    } 
+  }
+
+}
 
 @media (max-width: 1199px) {
   nav {
