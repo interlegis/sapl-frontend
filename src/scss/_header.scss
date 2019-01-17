@@ -1,3 +1,10 @@
+
+$blue:    #02baf2 !default;
+$red:     #f84545 !default;
+
+
+
+
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
@@ -34,3 +41,11 @@
 @import "~bootstrap/scss/spinners";
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/print";
+
+
+@each $color, $value in $theme-colors {
+  .btn-outline-#{$color} {
+    @include button-outline-variant($value);
+    border-color: #d6e1e5;
+  }
+}

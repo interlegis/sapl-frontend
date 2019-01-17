@@ -27,8 +27,8 @@ h6, .h6 {
 }
 
 p {
-  margin: 0.5em 0;
-  .control-label {
+  margin: 0.25em 0;
+  &.control-label {
     font-weight: bold;
   }
 }
@@ -46,6 +46,31 @@ fieldset {
     }
   }
 }
+.hidden {
+  display: none;
+}
+
+.form-control-static {
+  padding: 0.2em 0;
+  padding-left: 12px;
+  background-color: #f7f7f7;
+  &:empty {
+    display: none;
+  }
+}
+
+.legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: inherit;
+  color: #333;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+  clear: both;
+}
 
 .page-header {
   margin: 20px 0px 10px;
@@ -60,7 +85,9 @@ fieldset {
 .lista-parlamentares .table td {
   vertical-align: middle;
 }
-
+small {
+  color: #777;
+}
 
 .container-tabaux {
   .sidebar-tabaux {
