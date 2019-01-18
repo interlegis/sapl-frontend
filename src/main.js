@@ -28,7 +28,5 @@ import 'tinymce/plugins/save'
 
 import "./js/functions"
 
-
-
 window.refreshDatePicker();
 window.initTinymce("texto-rico");
