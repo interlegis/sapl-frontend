@@ -7,7 +7,7 @@ window.removeTinymce = function () {
   }
 }
 
-window.initTinymce = function (elements, readonly = false) {
+window.initTextRichEditor = function (elements, readonly = false) {
   window.removeTinymce()
   let configTinymce = {
     'force_br_newlines': false,
