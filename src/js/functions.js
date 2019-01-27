@@ -1,5 +1,4 @@
 import skinTinymce from "tinymce-light-skin";
-import $ from "jquery";
 
 window.removeTinymce = function () {
   while (window.tinymce.editors.length > 0) {

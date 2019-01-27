@@ -9,11 +9,11 @@ import 'tinymce/plugins/table'
 import 'tinymce/plugins/code'
 import 'tinymce/plugins/save'
 
-import "./scss/app.scss";
-import "./js/functions"
+import './scss/app.scss'
+import './js/functions'
 
-window.refreshDatePicker();
+window.refreshDatePicker()
 
 // Existem templates que chamam o editor através dessa function.
 // encasule seu editor rico nesta function com o que for passado como parametro
-window.initTextRichEditor("texto-rico");
+window.initTextRichEditor('texto-rico')
