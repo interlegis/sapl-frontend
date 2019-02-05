@@ -27,7 +27,7 @@ class RelativeBundleTrackerPlugin extends BundleTrackerPlugin {
 
 const dotenv = require('dotenv')
 dotenv.config({
-  path: '../sapl/.env'
+  path: '../sapl/sapl/.env'
 })
 
 var FRONTEND_CUSTOM = process.env.FRONTEND_CUSTOM === undefined ? false : process.env.FRONTEND_CUSTOM
