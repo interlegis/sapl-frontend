@@ -561,5 +561,6 @@ window.DispositivoEdit = function () {
 }
 
 _$(document).ready(function () {
-  window.DispositivoEdit()
+  if ($('.cpe').length > 0)
+    window.DispositivoEdit()
 })

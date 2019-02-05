@@ -1,14 +1,6 @@
 const path = require('path')
 const each = require('lodash/fp/each')
 
-/* var SplitByPathPlugin = require('webpack-split-by-path');
-new SplitByPathPlugin([
-  {
-    name: 'vendor',
-    path: path.join(__dirname, './node_modules/')
-  }
-]) */
-
 const BundleTrackerPlugin = require('webpack-bundle-tracker')
 class RelativeBundleTrackerPlugin extends BundleTrackerPlugin {
   convertPathChunks(chunks) {
@@ -30,14 +22,12 @@ dotenv.config({
   path: '../sapl/sapl/.env'
 })
 
-var FRONTEND_CUSTOM = process.env.FRONTEND_CUSTOM === undefined ? false : process.env.FRONTEND_CUSTOM
-
+var FRONTEND_CUSTOM = process.env.FRONTEND_CUSTOM === undefined ? false : process.env.FRONTEND_CUSTOM === "True"
 
 module.exports = {
   runtimeCompiler: true,
   publicPath: process.env.NODE_ENV === 'production' ? '/static/' : 'http://localhost:8080/',
   outputDir: FRONTEND_CUSTOM ? 'dist' : '../sapl/sapl/static/',
-
 
   chainWebpack: config => {
 

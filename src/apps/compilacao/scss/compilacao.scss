@@ -1524,10 +1524,12 @@ a:link:after, a:visited:after {
     color: gray;
   }
 }
-.cp-nav-parents {
-  & > .dropdown-menu {
+
+.cp-nav-parents { 
+  .dropdown-menu {
     left: 0;
     right: auto;
+    padding: 0;
     &::before {
       content: '';
       position: absolute;
@@ -1537,12 +1539,14 @@ a:link:after, a:visited:after {
     }
   }
   &:hover {
-    & > .dropdown-menu {
+    .dropdown-menu {
       display: block;
     }
   }
+  a.active small {
+    color: white !important;
+  }
 }
-
 .table-notificacoes {
   tbody {
     tr {
