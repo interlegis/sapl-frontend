@@ -40,6 +40,11 @@ window.initTextRichEditor = function (elements, readonly = false) {
 window.refreshDatePicker = function() {
   $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
   $('.dateinput').datepicker();
+
+  let dateinput = document.querySelectorAll('.dateinput')
+  _.each(dateinput, function (input, index) {
+    input.setAttribute('autocomplete', 'off')
+  })
 }
 
 window.getCookie = function (name) {

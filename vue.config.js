@@ -30,12 +30,13 @@ dotenv.config({
   path: '../sapl/.env'
 })
 
-var FRONTEND_CUSTOM = process.env.FRONTEND_CUSTOM === undefined ? 'sapl-oficial-theme' : process.env.FRONTEND_CUSTOM
+var FRONTEND_CUSTOM = process.env.FRONTEND_CUSTOM === undefined ? false : process.env.FRONTEND_CUSTOM
+
 
 module.exports = {
   runtimeCompiler: true,
   publicPath: process.env.NODE_ENV === 'production' ? '/static/' : 'http://localhost:8080/',
-  outputDir: '../sapl/static/',
+  outputDir: FRONTEND_CUSTOM ? 'dist' : '../sapl/sapl/static/',
 
 
   chainWebpack: config => {
@@ -56,7 +57,7 @@ module.exports = {
       .plugin('RelativeBundleTrackerPlugin')
       .use(RelativeBundleTrackerPlugin, [{
         path: '.',
-        filename: '../webpack-stats.json'
+        filename: FRONTEND_CUSTOM ? './webpack-stats.json' : '../sapl/webpack-stats.json'
       }])
 
     config.resolve.alias
@@ -76,38 +77,9 @@ module.exports = {
         'Access-Control-Allow-Origin': '*'
       })
       .contentBase([
-        //path.join(__dirname, 'public'),
+        path.join(__dirname, 'public'),
         path.join(__dirname, 'src', 'assets')
-        // path.join(__dirname, 'node_modules', FRONTEND_CUSTOM, 'public'),
-        // path.join(__dirname, 'node_modules', FRONTEND_CUSTOM, 'src', 'assets')
       ])
-    config
-      .plugin('copy')
-      .use(require('copy-webpack-plugin'), [
-        [{
-          from: path.join(__dirname, 'node_modules', FRONTEND_CUSTOM, 'public'),
-          to: path.join(__dirname, '..', 'sapl', 'static'),
-          toType: 'dir',
-          ignore: [
-            '.DS_Store'
-          ]
-        }]
-      ])
-
-    /*config
-      .plugin('copy')
-      .tap(([options]) => {
-        options.push(
-          {
-            from: path.join(__dirname, 'node_modules', FRONTEND_CUSTOM, 'public'),
-            to: path.join(__dirname, '..', 'sapl', 'static'),
-            toType: 'dir',
-            ignore: [
-              '.DS_Store'
-            ]
-          })
-        return [options]
-      }) */
 
     config
       .plugin('provide')
@@ -122,12 +94,6 @@ module.exports = {
     config.entryPoints.delete('app')
 
     config
-      .entry(FRONTEND_CUSTOM)
-      .add('./src/theme-dev/main.js')
-      //.add(FRONTEND_CUSTOM + '/src/main.js')
-      .end()
-
-    config
       .entry('global')
       .add('./src/global/main.js')
       .end()
@@ -135,12 +101,5 @@ module.exports = {
     config.entry('compilacao')
       .add('./src/apps/compilacao/main.js')
       .end()
-
-    /* config
-    .plugin('theme')
-    .use(webpack.DefinePlugin, [{
-      FRONTEND_CUSTOM: JSON.stringify(FRONTEND_CUSTOM)
-    }])
-    .end() */
   }
 }

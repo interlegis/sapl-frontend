@@ -7159,18 +7159,6 @@ safe-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sapl-oficial-theme@../../sapl-oficial-theme:
-  version "0.1.1"
-  dependencies:
-    "@fortawesome/fontawesome-free" "^5.6.3"
-    bootstrap "^4.2.1"
-    jquery "^3.3.1"
-    jquery-ui-themes "^1.12.0"
-    popper.js "^1.14.6"
-    vue "^2.5.21"
-    webpack "^4.28.4"
-    webpack-jquery-ui "^2.0.1"
-
 sass-graph@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/sass-graph/-/sass-graph-2.2.4.tgz#13fbd63cd1caf0908b9fd93476ad43a51d1e0b49"

@@ -22,8 +22,10 @@ import './scss/app.scss'
 import './js/image_cropping'
 import './js/functions'
 
+window.$ = $
+window.jQuery = $
+
 window.autorModal()
 window.refreshMask()
+window.refreshDatePicker()
 window.initTextRichEditor('texto-rico')
-
-// import './js/datepicker'
