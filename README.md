@@ -1,4 +1,4 @@
-# sapl-oficial-theme
+# sapl-frontend
 
 ## Project setup
 ```
