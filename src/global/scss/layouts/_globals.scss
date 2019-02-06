@@ -37,6 +37,9 @@ label {
   margin-bottom: 0;
   line-height: 1;
 }
+input[type=checkbox], input[type=radio] {
+  margin: 0 5px 0 0;
+}
 
 fieldset {
   fieldset {
