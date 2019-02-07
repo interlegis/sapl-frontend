@@ -91,5 +91,9 @@ module.exports = {
     config.entry('compilacao')
       .add('./src/apps/compilacao/main.js')
       .end()
+
+    config.entry('painel')
+      .add('./src/apps/painel/main.js')
+      .end()
   }
 }
