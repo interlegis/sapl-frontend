@@ -26,8 +26,8 @@ var FRONTEND_CUSTOM = process.env.FRONTEND_CUSTOM === undefined ? false : proces
 
 module.exports = {
   runtimeCompiler: true,
-  publicPath: process.env.NODE_ENV === 'production' ? '/static/' : 'http://localhost:8080/',
-  outputDir: FRONTEND_CUSTOM ? 'dist' : '../sapl/sapl/static/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/static/sapl/' : 'http://localhost:8080/',
+  outputDir: FRONTEND_CUSTOM ? 'dist' : '../sapl/sapl/static/sapl/',
 
   chainWebpack: config => {
 
@@ -47,7 +47,7 @@ module.exports = {
       .plugin('RelativeBundleTrackerPlugin')
       .use(RelativeBundleTrackerPlugin, [{
         path: '.',
-        filename: FRONTEND_CUSTOM ? './webpack-stats.json' : '../sapl/webpack-stats.json'
+        filename: FRONTEND_CUSTOM ? './webpack-stats.json' : '../sapl/sapl/webpack-stats.json'
       }])
 
     config.resolve.alias
