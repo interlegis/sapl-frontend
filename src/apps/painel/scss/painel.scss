@@ -4,9 +4,13 @@
   font-family: Verdana;
   .text-title {
     color: #4fa64d;
+    margin: 0.5rem;
   }
   .text-subtitle {
     color: #459170;
+  }
+  .data-hora {
+    font-size: 180%;
   }
 
   .text-value {
@@ -20,5 +24,17 @@
     flex-wrap: wrap;
   }
   .painel{
+    margin-top: 1rem;
+    table {
+      width: 100%;
+    }
+    h2 {
+      margin-bottom: 0.5rem;
+    }
+    #votacao, #oradores_list {
+      text-align: left;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
   }
 }
