@@ -108,7 +108,7 @@ function textoMultiVigente (item, diff) {
         0
       )
     } catch (err) {
-      console.log(err)
+      // console.log(err)
     }
   }
 }
@@ -146,7 +146,7 @@ function textoVigente (item, link) {
         0
       )
     } catch (err) {
-      console.log(err)
+      // console.log(err)
     }
   }
 }

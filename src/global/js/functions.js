@@ -1,4 +1,4 @@
-import skinTinymce from "tinymce-light-skin";
+import skinTinymce from 'tinymce-light-skin'
 
 window.removeTinymce = function () {
   while (window.tinymce.editors.length > 0) {
@@ -15,8 +15,8 @@ window.initTextRichEditor = function (elements, readonly = false) {
     'content_style': skinTinymce.contentStyle,
     'skin': false,
     'plugins': ['table save code'],
-    'menubar': "edit format table tools",
-    toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+    'menubar': 'edit format table tools',
+    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
     'tools': 'inserttable'
   }
 
@@ -36,10 +36,9 @@ window.initTextRichEditor = function (elements, readonly = false) {
   window.tinymce.init(configTinymce)
 }
 
-
-window.refreshDatePicker = function() {
-  $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
-  $('.dateinput').datepicker();
+window.refreshDatePicker = function () {
+  $.datepicker.setDefaults($.datepicker.regional['pt-BR'])
+  $('.dateinput').datepicker()
 
   let dateinput = document.querySelectorAll('.dateinput')
   _.each(dateinput, function (input, index) {
@@ -59,7 +58,7 @@ window.getCookie = function (name) {
       }
     }
   }
-  return cookieValue 
+  return cookieValue
 }
 
 window.autorModal = function () {

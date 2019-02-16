@@ -494,7 +494,7 @@ window.DispositivoEdit = function () {
 
         let url = pk + '/refresh?action=json_drag_move_dpt_alterado&index=' + ui.item.index() + '&bloco_pk=' + bloco_pk
         _$.get(url).done(function (data) {
-          console.log(pk + ' - ' + bloco_pk)
+          // console.log(pk + ' - ' + bloco_pk)
           // reloadFunctionsForObjectsOfCompilacao();
         })
       }
@@ -561,6 +561,7 @@ window.DispositivoEdit = function () {
 }
 
 _$(document).ready(function () {
-  if ($('.cpe').length > 0)
+  if ($('.cpe').length > 0) {
     window.DispositivoEdit()
+  }
 })
