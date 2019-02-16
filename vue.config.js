@@ -2,6 +2,9 @@ const path = require('path')
 const each = require('lodash/fp/each')
 
 const BundleTrackerPlugin = require('webpack-bundle-tracker')
+const CompressionPlugin = require('compression-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
 class RelativeBundleTrackerPlugin extends BundleTrackerPlugin {
   convertPathChunks(chunks) {
     each(each(chunk => {
@@ -30,18 +33,9 @@ module.exports = {
   outputDir: FRONTEND_CUSTOM ? 'dist' : '../sapl/sapl/static/sapl/',
 
   chainWebpack: config => {
-
     config.plugins.delete('html')
     config.plugins.delete('preload')
     config.plugins.delete('prefetch')
-
-    config
-      .mode('development')
-      .devtool('cheap-module-eval-source-map')
-
-    /* config
-      .optimization
-      .splitChunks(false) */
 
     config
       .plugin('RelativeBundleTrackerPlugin')
@@ -49,6 +43,21 @@ module.exports = {
         path: '.',
         filename: FRONTEND_CUSTOM ? './webpack-stats.json' : '../sapl/sapl/webpack-stats.json'
       }])
+
+    if (process.env.NODE_ENV === 'production') {
+      config
+        .optimization
+        .minimizer([new TerserPlugin()])
+        
+      config
+        .plugin('CompressionPlugin')
+        .use(CompressionPlugin, [{
+        }])
+    } else {
+      config
+        .devtool('source-map')
+
+    }
 
     config.resolve.alias
       .set('__STATIC__', 'static')
