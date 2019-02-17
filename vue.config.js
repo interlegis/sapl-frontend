@@ -101,8 +101,12 @@ module.exports = {
       .add('./src/apps/compilacao/main.js')
       .end()
 
-    config.entry('painel')
+      config.entry('painel')
       .add('./src/apps/painel/main.js')
       .end()
+
+      config.entry('sessao_online')
+        .add('./src/apps/sessao/online/main.js')
+        .end()
   }
 }
