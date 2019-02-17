@@ -8,7 +8,7 @@ const mutations = {
     state.messages.unshift(data)
     setTimeout(function () {
       state.messages.pop()
-    }, data.time)
+    }, 5000)
   },
   [MESSAGE_POP] (state) {
     state.messages.pop()
