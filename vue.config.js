@@ -56,11 +56,29 @@ module.exports = {
     } else {
       config
         .devtool('source-map')
-
     }
 
     config.resolve.alias
       .set('__STATIC__', 'static')
+
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .loader('vue-loader')
+      .tap(options => {
+        options['transformAssetUrls'] = {
+          img: 'src',
+          image: 'xlink:href',
+          'b-img': 'src',
+          'b-img-lazy': ['src', 'blank-src'],
+          'b-card': 'img-src',
+          'b-card-img': 'img-src',
+          'b-carousel-slide': 'img-src',
+          'b-embed': 'src'
+        }
+
+        return options
+      })
 
     config.devServer
       .public('')
@@ -101,12 +119,12 @@ module.exports = {
       .add('./src/apps/compilacao/main.js')
       .end()
 
-      config.entry('painel')
+    config.entry('painel')
       .add('./src/apps/painel/main.js')
       .end()
 
-      config.entry('sessao_online')
-        .add('./src/apps/sessao/online/main.js')
-        .end()
-  }
+    config.entry('sessao_online')
+      .add('./src/apps/sessao/online/main.js')
+      .end()
+  },
 }
