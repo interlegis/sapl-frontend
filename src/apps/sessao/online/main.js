@@ -35,7 +35,7 @@ sync(store, router)
 const app = new Vue({ // eslint-disable-line
   router,
   store,
-  el: '#app',
+  el: '#app-frontend-base-content',
   components: { App },
   template: '<App/>'
 })

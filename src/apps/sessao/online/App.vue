@@ -1,13 +1,12 @@
 <template>
-  <div id="app">
-    <message v-bind:messages="getMessages"></message>
+  <div id="app-frontend-base-content">
+    <message></message>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Message from '@/commons/components/message/Message'
-import { mapGetters } from 'vuex'
 export default {
   name: 'app',
   components: {
@@ -16,11 +15,6 @@ export default {
   data () {
     return {
     }
-  },
-  computed: {
-    ...mapGetters({
-      getMessages: 'getMessages'
-    })
   }
 }
 </script>

@@ -1,35 +1,36 @@
 <template lang="html">
   <div class="container-messages">
-    <div :class="['alert', msg.alert]" v-for="(msg, key) in messages" :key="key">
-      {{msg.message}}
-    </div>
+    <alert
+      :variant="msg.alert"
+      show
+      dismissible
+      v-for="(msg, key) in getMessages"
+      :key="key"
+      v-model="msg.time"
+      :message_id="msg.id">
+        {{msg.message}}
+    </alert>
+
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
+import Alert from './Alert'
 export default {
   name: 'message',
-  props: {
-    messages: {
-      type: Array,
-      default () {
-        return []
-      }
-    }
-  },
   data () {
     return {
     }
   },
-  computed: {},
-  mounted () {},
-  methods: {
-    ...mapActions([
-      'popMessage'
-    ])
+  computed: {
+    ...mapGetters({
+      getMessages: 'getMessages'
+    })
   },
-  components: {}
+  components: {
+    'alert': Alert
+  }
 }
 </script>
 

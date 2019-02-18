@@ -5,18 +5,20 @@ import {
 
 const mutations = {
   [MESSAGE_SHIFT] (state, data) {
+    data.id = state.counter_id++
     state.messages.unshift(data)
-    setTimeout(function () {
-      state.messages.pop()
-    }, 5000)
   },
-  [MESSAGE_POP] (state) {
-    state.messages.pop()
+  [MESSAGE_POP] (state, message_id) {
+    _.remove(state.messages, function(msg) {
+      return message_id == msg.id;
+    });
+    
   }
 }
 
 const state = {
-  messages: []
+  messages: [],
+  counter_id: 0
 }
 
 const getters = {
@@ -25,7 +27,7 @@ const getters = {
 
 const actions = {
   sendMessage: ({ commit }, data) => commit(MESSAGE_SHIFT, data),
-  popMessage: ({ commit }) => commit(MESSAGE_POP)
+  popMessage: ({ commit }, message_id) => commit(MESSAGE_POP, message_id)
 }
 export default {
   state,
