@@ -16,10 +16,18 @@ import App from './App'
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+import VueNativeSock from 'vue-native-websocket'
 
 Vue.use(Vuex)
 Vue.use(Router)
 Vue.use(BootstrapVue)
+Vue.use(VueNativeSock, 'ws://' + window.location.host + '/ws/time-refresh/', {
+  reconnection: true, // (Boolean) whether to reconnect automatically (false)
+  //reconnectionAttempts: 5, // (Number) number of reconnection attempts before giving up (Infinity),
+  //reconnectionDelay: 3000, // (Number) how long to initially wait before attempting a new (1000)
+})
+
+
 
 loadProgressBar()
 

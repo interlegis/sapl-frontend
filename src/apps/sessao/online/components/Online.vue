@@ -21,9 +21,12 @@ export default {
   mounted: function () {
     document.querySelector('body').classList.add('body-sessao-online')
 
-    this.sendMessage({ alert: 'success', message: 'ok ok ok 10', time: 10 })
-    this.sendMessage({ alert: 'danger', message: 'ok ok ok 20', time: 20 })
-    this.sendMessage({ alert: 'danger', message: 'ok ok ok 30', time: 30 })
+    this.sendMessage({ alert: 'success', message: 'ok ok ok 10', time: 5 })
+    this.sendMessage({ alert: 'danger', message: 'ok ok ok 20', time: 5 })
+
+    this.$options.sockets.onmessage = (event) => {
+      this.sendMessage({ alert: 'info', message: event.data, time: 10 })
+    }
   }
 }
 </script>
