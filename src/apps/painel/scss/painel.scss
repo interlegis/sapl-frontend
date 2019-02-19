@@ -2,12 +2,15 @@
 .painel-principal {
   background: #1c1b1b;
   font-family: Verdana;
+  font-size: x-large;
   .text-title {
     color: #4fa64d;
     margin: 0.5rem;
+	font-weight: bold;
   }
   .text-subtitle {
     color: #459170;
+	font-weight: bold;
   }
   .data-hora {
     font-size: 180%;
