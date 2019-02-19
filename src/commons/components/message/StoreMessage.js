@@ -12,7 +12,6 @@ const mutations = {
     _.remove(state.messages, function(msg) {
       return message_id == msg.id;
     });
-    
   }
 }
 

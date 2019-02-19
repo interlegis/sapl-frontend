@@ -1,12 +1,15 @@
 <template>
-  <div class="app-sessao-online">
-  </div>
+  <base-layout></base-layout>
 </template>
 
 <script>
+import BaseLayout from '@/commons/components/layouts/BaseLayout'
 import { mapActions } from 'vuex'
 export default {
   name: 'online',
+  components: {
+    BaseLayout
+  },
   data () {
     return {
     }
@@ -19,10 +22,8 @@ export default {
     ])
   },
   mounted: function () {
-    document.querySelector('body').classList.add('body-sessao-online')
-
     this.sendMessage({ alert: 'success', message: 'ok ok ok 10', time: 5 })
-    this.sendMessage({ alert: 'danger', message: 'ok ok ok 20', time: 5 })
+    this.sendMessage({ alert: 'danger', message: 'ok ok ok 20', time: 10 })
 
     this.$options.sockets.onmessage = (event) => {
       this.sendMessage({ alert: 'info', message: event.data, time: 10 })
@@ -32,20 +33,5 @@ export default {
 </script>
 
 <style lang="sass">
-
-  .body-sessao-online
-    overflow: hidden
-
-  .app-sessao-online
-    position: fixed
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    background-color: rgba(#f9f9f9, 0.95)
-    z-index: 1000
-    display: grid
-    grid-template-columns: 50px 50px 50px 50px
-    grid-template-rows: auto
 
 </style>
