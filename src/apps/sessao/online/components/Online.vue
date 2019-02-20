@@ -1,14 +1,21 @@
 <template>
-  <base-layout></base-layout>
+  <base-layout>
+    <template slot="sideright">
+      <side-right></side-right>
+    </template>
+
+  </base-layout>
 </template>
 
 <script>
+import SideRight from './SideRight'
 import BaseLayout from '@/commons/components/layouts/BaseLayout'
 import { mapActions } from 'vuex'
 export default {
   name: 'online',
   components: {
-    BaseLayout
+    BaseLayout,
+    SideRight
   },
   data () {
     return {
