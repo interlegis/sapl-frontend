@@ -93,6 +93,7 @@ export default {
       margin-left: -5px;
     }
     &:hover {
+    text-decoration: none;
       position: relative;
       background-color: #dddddd;
       .text-link {

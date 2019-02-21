@@ -141,6 +141,9 @@ $padding-space: 1rem;
   }
   .main, .sideleft {
     background-color: rgba($color: #f0f0f0, $alpha: 1);
+    background-image: url("~@/assets/img/bg.png");
+  }
+  .main {
   }
   header {
     border-bottom: 1px #ddd solid;
