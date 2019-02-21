@@ -1,8 +1,13 @@
 <template>
-  <div class="base-layout">
+  <div :class="['base-layout', sideleft_expand ? 'left-expand': '']">
     <header>
       <div class="navigation">
         <slot name="navigation"></slot>
+        <a class="nav-toggler" @click="toogle_sideleft">
+          <span class="line"></span>
+          <span class="line"></span>
+          <span class="line"></span>
+        </a>
       </div>
       <div class="brand">
           <slot name="brand"></slot>
@@ -31,6 +36,12 @@ export default {
   name: 'base-layout',
   data () {
     return {
+      sideleft_expand: false
+    }
+  },
+  methods: {
+    toogle_sideleft: function () {
+      this.sideleft_expand = !this.sideleft_expand
     }
   },
   mounted: function () {
@@ -87,6 +98,7 @@ export default {
     @extend .row-middle;
     grid-column-start: 1;
     grid-column-end: 2;
+
   }
 
   .main {
@@ -115,21 +127,24 @@ export default {
   }
 }
 
-$border-color: #ddd;
 $padding-space: 1rem;
 
 .base-layout {
-  header, .sideright , .sideleft {
-    background-color: rgba($color: #f5f5f5, $alpha: 0.98);
+  .hover-circle:hover {
+    background-color: #dddddd;
+    border-radius: 50%;
   }
-  .main {
-    background-color: rgba($color: #f0f0f0, $alpha: 0.7);
+  header, .sideright, .sideleft {
+    background-color: rgba($color: #f5f5f5, $alpha: 1);
+  }
+  .main, .sideleft {
+    background-color: rgba($color: #f0f0f0, $alpha: 1);
   }
   header {
-    border-bottom: 1px $border-color solid;
+    border-bottom: 1px #ddd solid;
   }
   .sideright {
-    border-left: 1px $border-color solid;
+    border-left: 1px #ddd solid;
   }
 }
 
@@ -139,6 +154,39 @@ $padding-space: 1rem;
     padding: $padding-space;
     padding-bottom: 0;
   }
+
+  header {
+    .navigation, .brand, .header-main, .header-right {
+      padding: 8px;
+    }
+    .navigation {
+      padding: 8px 4px 8px 12px;
+    }
+  }
+
+  .nav-toggler {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+
+    .line {
+      background: #000;
+      display: block;
+      height: 2px;
+      width: 22px;
+      margin: 2px;
+    }
+    &:hover {
+      background-color: #ddd;
+
+    }
+  }
+
 }
 
 </style>
