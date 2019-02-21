@@ -86,11 +86,13 @@ export default {
 
   header {
     display: grid;
-
-    @extend .grid-template-columns;
     @extend .row-top;
+
+    grid-template-columns: 64px 2fr 1fr 64px;
     grid-column-start: 1;
     grid-column-end: 5;
+
+    align-content: stretch;
 
   }
 
@@ -158,6 +160,7 @@ $padding-space: 1rem;
   header {
     .navigation, .brand, .header-main, .header-right {
       padding: 8px;
+      height: 64px;;
     }
     .navigation {
       padding: 8px 4px 8px 12px;

@@ -1,7 +1,8 @@
 <template>
   <base-layout>
 
-    <template slot="navigation">
+    <template slot="brand">
+      <brand></brand>
     </template>
 
     <template slot="sideleft">
@@ -18,6 +19,7 @@
 <script>
 import SideRight from './SideRight'
 import SideLeft from './SideLeft'
+import Brand from './Brand'
 import BaseLayout from '@/commons/components/layouts/BaseLayout'
 import { mapActions } from 'vuex'
 export default {
@@ -25,7 +27,8 @@ export default {
   components: {
     BaseLayout,
     SideRight,
-    SideLeft
+    SideLeft,
+    Brand
   },
   data () {
     return {
