@@ -1,40 +1,21 @@
 <template>
-  <base-layout>
-
-    <template slot="brand">
-      <brand></brand>
-    </template>
-
-    <template slot="sideleft">
-      <side-left></side-left>
-    </template>
-
-    <template slot="sideright">
-      <side-right></side-right>
-    </template>
-
-  </base-layout>
+  <div id="app-frontend-base-content">
+    <message></message>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import SideRight from './SideRight'
-import SideLeft from './SideLeft'
-import Brand from './Brand'
-import BaseLayout from '@/commons/components/layouts/BaseLayout'
+import Message from '@/components/utils/message/Message'
 import { mapActions } from 'vuex'
 export default {
-  name: 'online',
+  name: 'app',
   components: {
-    BaseLayout,
-    SideRight,
-    SideLeft,
-    Brand
+    Message
   },
   data () {
     return {
     }
-  },
-  computed: {
   },
   methods: {
     ...mapActions([
@@ -52,6 +33,6 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="scss">
 
 </style>

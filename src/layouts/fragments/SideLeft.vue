@@ -1,13 +1,15 @@
 <template>
   <div class="w-100 h-100 d-flex flex-column align-items-start inner inner-sideleft">
-    <a :href="item.route" v-for="(item, key) in links" :key="key">
+    <router-link :to="{ name: item.route }" v-for="(item, key) in links" :key="key">
       <span class="hover-circle icon">
         <b-img :src="item.image" fluid rounded="0" />
       </span>
       <span class="text-link">
         {{item.texto}}
       </span>
-    </a>
+
+    </router-link>
+
   </div>
 </template>
 
@@ -19,7 +21,7 @@ export default {
       links: [
         {
           image: require('@/assets/img/icon_mesa_diretora.png'),
-          route: '',
+          route: 'index_link',
           texto: 'Mesa Diretora'
         },
         {
@@ -39,7 +41,7 @@ export default {
         },
         {
           image: require('@/assets/img/icon_plenarias.png'),
-          route: '',
+          route: 'sessao_link',
           texto: 'Sessões Plenárias'
         },
         {

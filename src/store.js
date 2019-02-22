@@ -1,4 +1,4 @@
-import StoreMessage from '@/commons/components/message/StoreMessage'
+import StoreMessage from './components/utils/message/StoreMessage'
 
 export default {
   modules: {

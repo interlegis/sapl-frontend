@@ -1,3 +1,7 @@
+// app - global
+// é uma app fundamental para o layout do sapl tradicional.
+// é importada pelo backend em seus templates
+
 import '@fortawesome/fontawesome-free/css/all.css'
 
 import 'bootstrap'

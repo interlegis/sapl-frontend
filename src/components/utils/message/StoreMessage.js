@@ -9,9 +9,9 @@ const mutations = {
     state.messages.unshift(data)
   },
   [MESSAGE_POP] (state, message_id) {
-    _.remove(state.messages, function(msg) {
-      return message_id == msg.id;
-    });
+    _.remove(state.messages, function (msg) {
+      return message_id === msg.id
+    })
   }
 }
 

@@ -45,6 +45,8 @@ module.exports = {
       }])
 
     if (process.env.NODE_ENV === 'production') {
+      
+
       config
         .optimization
         .minimizer([new TerserPlugin()])
@@ -112,19 +114,20 @@ module.exports = {
 
     config
       .entry('global')
-      .add('./src/global/main.js')
+      .add('./src/__global/main.js')
       .end()
 
     config.entry('compilacao')
-      .add('./src/apps/compilacao/main.js')
+      .add('./src/__apps/compilacao/main.js')
       .end()
 
     config.entry('painel')
-      .add('./src/apps/painel/main.js')
+      .add('./src/__apps/painel/main.js')
       .end()
 
-    config.entry('sessao_online')
-      .add('./src/apps/sessao/online/main.js')
+    config.entry('online')
+      .add('./src/main.js')
       .end()
+
   },
 }
