@@ -28,6 +28,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 Vue.use(Vuex)
 Vue.use(Router)
 Vue.use(BootstrapVue)
+
 Vue.use(VueNativeSock, 'ws://' + window.location.host + '/ws/time-refresh/', {
   reconnection: true // (Boolean) whether to reconnect automatically (false)
   // reconnectionAttempts: 5, // (Number) number of reconnection attempts before giving up (Infinity),
@@ -35,6 +36,14 @@ Vue.use(VueNativeSock, 'ws://' + window.location.host + '/ws/time-refresh/', {
 })
 
 loadProgressBar()
+
+Vue.mixin({
+  methods: {
+    ...Vuex.mapActions([
+      'sendMessage'
+    ])
+  },
+})
 
 Vue.config.productionTip = false
 

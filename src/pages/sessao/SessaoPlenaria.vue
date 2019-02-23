@@ -1,6 +1,6 @@
 <template>
-  <div>
-      teste de página para dentro do main - sessao-plenaria
+  <div class="online-sessaolenaria">
+      <router-view></router-view>
   </div>
 </template>
 
@@ -16,6 +16,6 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="scss">
 
 </style>

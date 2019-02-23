@@ -82,7 +82,7 @@ export default {
   display: grid;
 
   @extend .grid-template-columns;
-  grid-template-rows: 64px auto;
+  grid-template-rows: 60px auto;
 
   header {
     display: grid;
@@ -143,8 +143,6 @@ $padding-space: 1rem;
     background-color: rgba($color: #f0f0f0, $alpha: 1);
     background-image: url("~@/assets/img/bg.png");
   }
-  .main {
-  }
   header {
     border-bottom: 1px #ddd solid;
   }
@@ -163,10 +161,10 @@ $padding-space: 1rem;
   header {
     .navigation, .brand, .header-main, .header-right {
       padding: 8px;
-      height: 64px;
+      height: 60px;
     }
     .navigation {
-      padding: 8px 4px 8px 12px;
+      padding: 6px 4px 6px 12px;
     }
   }
 
