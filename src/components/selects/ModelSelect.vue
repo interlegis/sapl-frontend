@@ -7,6 +7,7 @@
 <script>
 
 import Resources from '@/resources'
+import { EventBus } from '@/event-bus'
 
 export default {
   name: 'model-select',
@@ -37,8 +38,17 @@ export default {
           { alert: 'danger', message: 'Não foi possível recuperar a lista...', time: 5 }))
     }
   },
-  mounted: function () {
-    this.fetch()
+  created: function () {
+    let _this = this
+    _this.fetch()
+    EventBus.$on('ws-message', function (data) {
+      if (data.message.app === _this.app && data.message.model === _this.model) {
+        _this.options = [
+          { value: null, text: _this.label }
+        ]
+        _this.fetch(1)
+      }
+    })
   }
 }
 </script>
