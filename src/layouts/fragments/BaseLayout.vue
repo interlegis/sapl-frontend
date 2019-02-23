@@ -163,7 +163,7 @@ $padding-space: 1rem;
   header {
     .navigation, .brand, .header-main, .header-right {
       padding: 8px;
-      height: 64px;;
+      height: 64px;
     }
     .navigation {
       padding: 8px 4px 8px 12px;

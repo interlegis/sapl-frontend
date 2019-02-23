@@ -17,6 +17,10 @@
       <router-view></router-view>
     </template>
 
+    <template slot="header-right">
+      <i class="fas fa-sign-out-alt hover-circle" @click="close" title="Sair da Interface Sapl Online"></i>
+    </template>
+
   </base-layout>
 </template>
 
@@ -36,10 +40,27 @@ export default {
   data () {
     return {
     }
+  },
+  methods: {
+    close () {
+      window.location.href = '/'
+    }
   }
 }
 </script>
 
-<style lang="sass">
-
+<style lang="scss">
+.header-right {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  i {
+    color: rgba(black, 0.5);
+    padding: 8px;
+    cursor: pointer;
+    &:hover {
+      color: black;
+    }
+  }
+}
 </style>
