@@ -11,7 +11,7 @@ export const routes = [
       { 
         path: 'sessao/', 
         name: 'sessao_link', 
-        component: () => import('@/pages/sessao/SessaoPlenaria.vue'),
+        component: () => import('@/pages/sessao/SessaoPlenariaModule.vue'),
         children: [
           {
             path: 'list/', 
