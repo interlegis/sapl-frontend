@@ -8,11 +8,18 @@ export default {
     ...BAlert
   },
   props: [
-    'message_id'
+    'message_id', 'show'
   ],
   data () {
     return {
 
+    }
+  },
+  watch: {
+    show: function (nv, ov) {
+      if (nv <= 1) {
+        this.popMessage(this.message_id)
+      }
     }
   },
 
@@ -20,15 +27,6 @@ export default {
     ...mapActions([
       'popMessage'
     ])
-  },
-
-  mounted () {
-    let _this = this
-    setInterval(function () {
-      if (_this.show === 0) {
-        _this.popMessage(_this.message_id)
-      }
-    }, 1000)
   }
 
 }

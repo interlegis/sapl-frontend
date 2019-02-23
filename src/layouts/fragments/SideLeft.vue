@@ -1,6 +1,6 @@
 <template>
   <div class="w-100 h-100 d-flex flex-column align-items-start inner inner-sideleft">
-    <router-link :to="{ name: item.route }" v-for="(item, key) in links" :key="key">
+    <router-link :to="{ name: item.route }" v-for="(item, key) in links" :key="key" @click.native="selectRoute(item)" :class="isSelected(item)">
       <span class="hover-circle icon">
         <b-img :src="item.image" fluid rounded="0" />
       </span>
@@ -18,6 +18,7 @@ export default {
   name: 'side-right',
   data () {
     return {
+      selected: '',
       links: [
         {
           image: require('@/assets/img/icon_mesa_diretora.png'),
@@ -59,8 +60,17 @@ export default {
           route: '',
           texto: 'Relatórios'
         }
-
       ]
+    }
+  },
+  computed: {
+  },
+  methods: {
+    isSelected (item) {
+      return item.texto === this.selected ? 'selected' : ''
+    },
+    selectRoute (item) {
+      this.selected = item.texto
     }
   }
 }
@@ -94,8 +104,8 @@ export default {
       left: 100%;
       margin-left: -5px;
     }
-    &:hover {
-    text-decoration: none;
+    &:hover, &.selected .icon {
+      text-decoration: none;
       position: relative;
       background-color: #dddddd;
       .text-link {
@@ -104,6 +114,9 @@ export default {
         border-radius: 0 24px 24px 0;
         padding: 8px 24px 8px 0;
       }
+    }
+    &.selected .icon  {
+      border-radius: 50%;
     }
   }
 }
@@ -119,7 +132,7 @@ export default {
       position: relative;
       left: auto;
     }
-    a:hover {
+    a:hover, a.selected  {
        background-color: #dddddd;
        border-radius: 0 24px 24px 0;
     }

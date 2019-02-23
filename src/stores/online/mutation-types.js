@@ -1,0 +1,3 @@
+
+export const QUEUE_DATA_WS = 'RECEIVE_DATA_FROM_WS'
+export const SHIFT_VALUE = 'SHIFT_VALUE'

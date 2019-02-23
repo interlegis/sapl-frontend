@@ -13,21 +13,18 @@ export default {
   components: {
     Message
   },
-  data () {
-    return {
-    }
-  },
   methods: {
     ...mapActions([
-      'sendMessage'
+      'sendMessage',
+      'wsQueueDataReceive'
     ])
   },
   mounted: function () {
-    this.sendMessage({ alert: 'success', message: 'ok ok ok 10', time: 5 })
-    this.sendMessage({ alert: 'danger', message: 'ok ok ok 20', time: 10 })
-
+    this.sendMessage({ alert: 'info', message: 'Base Atualizada', time: 4 })
+    this.sendMessage({ alert: 'info', message: 'Base Atualizada', time: 7 })
     this.$options.sockets.onmessage = (event) => {
-      this.sendMessage({ alert: 'info', message: event.data, time: 10 })
+      this.sendMessage({ alert: 'info', message: 'Base Atualizada', time: 3 })
+      this.wsQueueDataReceive(JSON.parse(event.data))
     }
   }
 }
