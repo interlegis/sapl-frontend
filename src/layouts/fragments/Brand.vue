@@ -1,10 +1,10 @@
 <template>
   <div class="w-100 d-flex inner-brand">
     <img src='@/assets/img/brasao_transp.gif'/>
-    <h4 class="title-brand">
+    <h5 class="title-brand">
       Câmara Municipal de Jataí - GO<br>
       <small>SAPL - Sistema de Apoio ao Processo Legislativo</small>
-    </h4>
+    </h5>
   </div>
 </template>
 
@@ -21,6 +21,7 @@ export default {
 <style lang="scss">
 .inner-brand {
   height: 100%;
+  align-items: center;
   img {
     width: auto;
     height: 100%;
@@ -29,6 +30,7 @@ export default {
     display: inline-block;
     padding-left: 1rem;
     line-height: 1;
+    margin: 0;
   }
 }
 </style>
