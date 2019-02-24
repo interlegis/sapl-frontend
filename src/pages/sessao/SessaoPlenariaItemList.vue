@@ -11,7 +11,7 @@
 <script>
 import Resources from '@/resources'
 export default {
-  name: 'sessao-plenaria',
+  name: 'sessao-plenaria-item-list',
   props: ['sessao'],
   data () {
     return {
@@ -29,20 +29,15 @@ export default {
       }
     }
   },
-  watch: {
-    sessao: function (nv, ov) {
-      this.data_inicio = this.stringToDate(nv.data_inicio, 'yyyy-mm-dd', '-')
-      this.metadata.sessao_legislativa.id = nv.sessao_legislativa
-      this.metadata.tipo.id = nv.tipo
-      this.fetch()
-    }
-  },
   computed: {
     titulo: function () {
-      return `${this.sessao.numero}ª ${this.tipo.nome} da 
-              ${this.data_inicio.getDate() > 15 ? 2 : 1}ª Quizena do Mês de 
-              ${this.month_text(this.data_inicio.getMonth())} de 
-              ${this.data_inicio.getFullYear()}
+      let sessao = this.sessao
+      let tipo = this.tipo
+      let data_inicio = this.data_inicio
+      return `${sessao.numero}ª ${tipo.nome} da 
+              ${data_inicio.getDate() > 15 ? 2 : 1}ª Quizena do Mês de 
+              ${this.month_text(data_inicio.getMonth())} de 
+              ${data_inicio.getFullYear()}
               `
     },
     subtitulo: function () {
@@ -83,13 +78,30 @@ export default {
           _this
             .insertInState(meta)
             .then((response) => {
-              _this[key] = _this.getModel(meta)
+              _this[key] = _this.getModel(meta)[meta.id]
             })
         } else {
-          _this[key] = sl
+          if (sl[meta.id] === undefined) {
+            _this
+              .$nextTick()
+              .then(() => {
+                setTimeout(function () {
+                  _this.fetch()
+                }, 100)
+              })
+          } else {
+            _this[key] = sl[meta.id]
+          }
         }
       })
     }
+  },
+  mounted: function () {
+    this.data_inicio = this.stringToDate(this.sessao.data_inicio, 'yyyy-mm-dd', '-')
+    this.metadata.sessao_legislativa.id = this.sessao.sessao_legislativa
+    this.metadata.tipo.id = this.sessao.tipo
+    this.metadata.legislatura.id = this.sessao.legislatura
+    this.fetch()
   }
 }
 </script>

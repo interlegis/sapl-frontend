@@ -27,6 +27,11 @@ export default {
         { value: 12, text: 'Dezembro' }
       ]
     }
+  },
+  watch: {
+    selected: function (nv, ov) {
+      this.$emit('change', nv)
+    }
   }
 }
 </script>

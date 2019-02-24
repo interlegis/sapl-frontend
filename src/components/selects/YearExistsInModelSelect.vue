@@ -22,6 +22,11 @@ export default {
       ]
     }
   },
+  watch: {
+    selected: function (nv, ov) {
+      this.$emit('change', nv)
+    }
+  },
   methods: {
     fetch () {
       this.utils.getYearsChoiceList(this.app, this.model)

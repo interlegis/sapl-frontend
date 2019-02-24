@@ -22,6 +22,11 @@ export default {
       ]
     }
   },
+  watch: {
+    selected: function (nv, ov) {
+      this.$emit('change', nv)
+    }
+  },
   methods: {
     fetch (next_page = 1) {
       let _this = this

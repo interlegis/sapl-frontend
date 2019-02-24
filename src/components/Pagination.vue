@@ -9,7 +9,7 @@
         <b-pagination align="right" :total-rows="pagination.total_entries" v-model="currentPage" :per-page="10"/>
       </div>
     </div>
-    <span class="arrow hover-circle" @click="nextPage">
+    <span :class="['arrow', pagination.next_page !== null ? 'hover-circle' : 'disabled']"  @click="nextPage">
       <i class="fas fa-chevron-right"></i>
     </span>
 
@@ -44,6 +44,8 @@ export default {
 </script>
 <style lang="scss">
 .widget-pagination {
+
+  position: relative;
   background-color: rgba(white, 0.2);
   border: 1px #dddddd solid;
   border-radius: 20px;
@@ -64,14 +66,17 @@ export default {
     cursor: not-allowed;
   }
   .pages {
-    position: relative;
     line-height: 38px;
+    position: static;
     .inner {
+      z-index: 1;
       position: absolute;
       top: 100%;
-      right: -50px;
+      right: 20px;
       display: none;
-      padding-top: 10px;
+      padding: 15px 15px 0;
+      border: 1px #dddddd solid;
+      background-color: rgba($color: white, $alpha: 0.9);
     }
     &:hover {
       .inner {

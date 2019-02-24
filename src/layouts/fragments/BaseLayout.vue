@@ -191,6 +191,14 @@ $padding-space: 1rem;
     }
   }
 
+  .empty-list {
+    background-color: rgba($color: #e0e0e0, $alpha: 0.9);
+    background-image: url("~@/assets/img/bg.png");
+    padding: 3rem;
+    text-align: center;
+    font-size: 120%;
+  }
+
 }
 
 </style>

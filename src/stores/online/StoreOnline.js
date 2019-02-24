@@ -27,7 +27,7 @@ const mutations = {
       state.cache[data.app][data.model] = {}
 
     }
-    state.cache[data.app][data.model][data.value.id] = data.value
+    state.cache[data.app][data.model][data.id] = data.value
   }
 }
 
@@ -47,29 +47,42 @@ const getters = {
     if (!state.cache[metadata.app][metadata.model].hasOwnProperty(metadata.id)) {
       return null
     }
-    return state.cache[metadata.app][metadata.model][metadata.id]
+    return state.cache[metadata.app][metadata.model]
   }
 }
 
 const actions = {
   removeFromState: ({ commit }, data) => commit(REMOVE_FROM_STATE, data),
-  insertInState: ({ commit }, metadata) => {
+  insertInState: ({ commit, getters }, metadata) => {
     if (metadata.hasOwnProperty('value')) {
       commit(INSERT_IN_STATE, metadata)
-      return
+      return 
     }
-    let utils = Resources.Utils
-    return utils
-            .getModel(metadata.app, metadata.model, metadata.id)
-            .then(response => {
-              commit(INSERT_IN_STATE, {
-                app: metadata.app,
-                model: metadata.model,
-                value: response.data
+
+    let fetch = function() {
+      let utils = Resources.Utils
+      return utils
+              .getModel(metadata.app, metadata.model, metadata.id)
+              .then(response => {
+                commit(INSERT_IN_STATE, {
+                  app: metadata.app,
+                  model: metadata.model,
+                  value: response.data,
+                  id: response.data.id
+                })
               })
-            })
-            .catch((response) => metadata.component.sendMessage(
-              { alert: 'danger', message: 'Não foi possível fetch...', time: 5 }))
+              .catch((response) => metadata.component.sendMessage(
+                { alert: 'danger', message: 'Não foi possível fetch...', time: 5 }))
+    }
+
+    let model = getters.getModel(metadata)
+    if (model === null) {
+      commit(INSERT_IN_STATE, metadata)
+      return fetch()
+    }
+    if (!model.hasOwnProperty(metadata.id)) {      
+      return fetch()
+    }
   }
 }
 export default {

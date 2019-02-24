@@ -1,8 +1,8 @@
 <template>
   <div class="form-sessao-list">
-      <year-exists-in-model-select class="form-opacity" app="sessao" model="sessaoplenaria" label="Filtre por Ano"></year-exists-in-model-select>
-      <month-select class="form-opacity"></month-select>
-      <model-select class="form-opacity" app="sessao" model="tiposessaoplenaria" label="Filtre por Tipo de Sessão" choice="nome" ordering="nome"></model-select>
+      <year-exists-in-model-select v-on:change="value => form_filter.year=value" class="form-opacity" app="sessao" model="sessaoplenaria" label="Filtre por Ano"></year-exists-in-model-select>
+      <month-select v-on:change="value => form_filter.month=value"  class="form-opacity"></month-select>
+      <model-select v-on:change="value => form_filter.tipo=value" class="form-opacity" app="sessao" model="tiposessaoplenaria" label="Filtre por Tipo de Sessão" choice="nome" ordering="nome"></model-select>
 
       <pagination :pagination="pagination" v-on:nextPage="nextPage" v-on:previousPage="previousPage" v-on:currentPage="currentPage"></pagination>
   </div>
@@ -24,7 +24,22 @@ export default {
   },
   data () {
     return {
-
+      form_filter: {
+        year: null,
+        month: null,
+        tipo: null
+      }
+    }
+  },
+  watch: {
+    'form_filter.year': function (nv) {
+      this.$emit('changeFilter', this.form_filter)
+    },
+    'form_filter.month': function (nv) {
+      this.$emit('changeFilter', this.form_filter)
+    },
+    'form_filter.tipo': function (nv) {
+      this.$emit('changeFilter', this.form_filter)
     }
   },
   methods: {
