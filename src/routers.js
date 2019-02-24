@@ -17,6 +17,11 @@ export const routes = [
             path: 'list/', 
             name: 'sessao_list_link', 
             component: () => import('@/pages/sessao/SessaoList.vue'),
+          },
+          {
+            path: ':id/', 
+            name: 'sessao_plenaria_online_link', 
+            component: () => import('@/pages/sessao/SessaoPlenariaOnline.vue'),
           }
         ]
       }

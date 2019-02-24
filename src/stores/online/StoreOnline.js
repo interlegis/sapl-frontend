@@ -6,7 +6,8 @@ import {
 import Resources from '@/resources'
 
 const mutations = {
-  [REMOVE_FROM_STATE] (state, data) { 
+  [REMOVE_FROM_STATE] (state, wsdata) {
+    let data = wsdata.message 
     if (!state.cache.hasOwnProperty(data.app)) {
       return
     }    

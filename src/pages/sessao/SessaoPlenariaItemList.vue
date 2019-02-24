@@ -1,21 +1,24 @@
 <template>
-  <div class="sessao-plenaria-item-list">
+  <router-link :class="'sessao-plenaria-item-list'" :to="{ name: 'sessao_plenaria_online_link', params: {id: sessao.id} }" @click.native="sendStore">
     <h6 class="tit">
       {{titulo}}
     </h6>
     <small>
       <span class="sub">{{subtitulo}}</span> – <span class="dat-text">{{date_text}}</span>
     </small>
-  </div>
+  </router-link>
 </template>
 <script>
 import Resources from '@/resources'
+import { EventBus } from '@/event-bus'
 export default {
   name: 'sessao-plenaria-item-list',
   props: ['sessao'],
   data () {
     return {
       utils: Resources.Utils,
+      app: ['sessao', 'parlamentares'],
+      model: ['sessaoplenaria', 'sessaolegislativa', 'tiposessaoplenaria', 'legislatura'],
 
       data_inicio: new Date(),
       sessao_legislativa: { numero: '' },
@@ -51,6 +54,14 @@ export default {
     }
   },
   methods: {
+    sendStore () {
+      this.insertInState({
+        app: 'sessao',
+        model: 'sessaoplenaria',
+        id: this.sessao.id,
+        value: this.sessao
+      })
+    },
     month_text (month_num) {
       let month = [
         'Janeiro',
@@ -102,6 +113,15 @@ export default {
     this.metadata.tipo.id = this.sessao.tipo
     this.metadata.legislatura.id = this.sessao.legislatura
     this.fetch()
+  },
+  created: function () {
+    let _this = this
+    EventBus.$on('ws-message', function (data) {
+      if (_.indexOf(_this.app, data.message.app) !== -1 &&
+          _.indexOf(_this.model, data.message.model) !== -1) {
+        _this.fetch()
+      }
+    })
   }
 }
 </script>
@@ -109,6 +129,7 @@ export default {
 .sessao-plenaria-item-list {
     //background-color: rgba($color: #f5f5f5, $alpha: 0.9);
     //text-align: center;
+    display: block;
     background-image: url("~@/assets/img/bg.png");
     border-bottom: 1px solid #d5d5d5;
     padding: 15px;
@@ -121,6 +142,7 @@ export default {
 
     &:hover {
       background-color: rgba($color: #f5f5f5, $alpha: 0.9);
+      text-decoration: none;
     }
     .sub, .dat-text {
       color: #777;

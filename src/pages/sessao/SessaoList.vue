@@ -8,8 +8,11 @@
       v-on:changeFilter="changeFilter"></form-sessao-list>
     <div class="inner-list">
       <sessao-plenaria-item-list :sessao="item" v-for="(item, key) in sessoes" :key="key"></sessao-plenaria-item-list>
-      <div class="empty-list" v-if="sessoes.length === 0">
+      <div class="empty-list" v-if="sessoes.length === 0 && init">
           Não foram encontradas Sessões Plenárias com seus critérios de busca!
+      </div>
+      <div class="empty-list" v-if="!init">
+          Carregando listagem...
       </div>
     </div>
   </div>
@@ -29,8 +32,9 @@ export default {
   data () {
     return {
       utils: Resources.Utils,
-      app: 'sessao',
-      model: 'sessaoplenaria',
+      init: false,
+      app: ['sessao'],
+      model: ['sessaoplenaria', 'tiposessaoplenaria'],
       ordering: '-data_inicio, -hora_inicio, -id',
       sessoes: [],
       pagination: {},
@@ -64,24 +68,35 @@ export default {
       if (ff.month !== null) query_string += `&month=${ff.month}`
       if (ff.tipo !== null) query_string += `&tipo=${ff.tipo}`
 
-      _this.utils.getModelOrderedList(_this.app, _this.model, _this.ordering, page, query_string)
+      return _this.utils.getModelOrderedList(_this.app[0], _this.model[0], _this.ordering, page === null ? 1 : page, query_string)
         .then((response) => {
+          _this.init = true
           _this.sessoes = []
-          this.$nextTick()
+          _this.$nextTick()
             .then(function () {
               _this.sessoes = response.data.results
               _this.pagination = response.data.pagination
             })
         })
-        .catch((response) => _this.sendMessage(
-          { alert: 'danger', message: 'Não foi possível recuperar a lista...', time: 5 }))
+        .catch((response) => {
+          if (page !== 1) {
+            _this
+              .fetch(_this.pagination.previous_page)
+              .catch(() => {
+                _this.init = true
+                _this.sendMessage(
+                  { alert: 'danger', message: 'Não foi possível recuperar a lista...', time: 5 })
+              })
+          }
+        })
     }
   },
   created: function () {
     let _this = this
     _this.fetch(1)
     EventBus.$on('ws-message', function (data) {
-      if (data.message.app === _this.app && data.message.model === _this.model) {
+      if (_.indexOf(_this.app, data.message.app) !== -1 &&
+          _.indexOf(_this.model, data.message.model) !== -1) {
         _this.fetch(_this.pagination.page)
       }
     })
