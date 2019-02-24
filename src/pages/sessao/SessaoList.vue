@@ -1,39 +1,49 @@
 <template>
   <div class="sessaoplenaria-list">
-    <form-sessao-list></form-sessao-list>
+    <form-sessao-list :pagination="pagination" v-on:nextPage="nextPage" v-on:previousPage="previousPage" v-on:currentPage="currentPage"></form-sessao-list>
     <div class="inner-list">
-
+      <sessao-plenaria :sessao="item" v-for="(item, key) in sessoes" :key="key"></sessao-plenaria>
     </div>
   </div>
 </template>
 
 <script>
-import FormSessaoList from './FormSessaoList'
-import Resources from '@/resources'
 import { EventBus } from '@/event-bus'
+import Resources from '@/resources'
+import FormSessaoList from './FormSessaoList'
+import SessaoPlenaria from './SessaoPlenaria'
 export default {
   name: 'sessao-list',
   components: {
-    FormSessaoList
+    FormSessaoList,
+    SessaoPlenaria
   },
   data () {
     return {
       utils: Resources.Utils,
       app: 'sessao',
       model: 'sessaoplenaria',
-      page: 1,
       ordering: '-data_inicio',
-      total_pages: 1,
-      sessoes: []
+      sessoes: [],
+      pagination: {}
     }
   },
   methods: {
-    fetch () {
+    currentPage (value) {
+      this.fetch(value)
+    },
+    nextPage () {
+      return this.pagination.next_page !== null ? this.fetch(this.pagination.next_page) : null
+    },
+    previousPage () {
+      return this.pagination.previous_page !== null ? this.fetch(this.pagination.previous_page) : null
+    },
+    fetch (page) {
       let _this = this
-      _this.utils.getModelOrderedList(_this.app, _this.model, _this.ordering, _this.page)
+      _this.utils.getModelOrderedList(_this.app, _this.model, _this.ordering, page)
         .then((response) => {
           _this.sessoes = response.data.results
-          _this.total_pages = response.data.pagination.total_pages
+          _this.pagination = response.data.pagination
         })
         .catch((response) => _this.sendMessage(
           { alert: 'danger', message: 'Não foi possível recuperar a lista...', time: 5 }))
@@ -41,10 +51,10 @@ export default {
   },
   created: function () {
     let _this = this
-    _this.fetch()
+    _this.fetch(1)
     EventBus.$on('ws-message', function (data) {
       if (data.message.app === _this.app && data.message.model === _this.model) {
-        _this.fetch()
+        _this.fetch(_this.pagination.page)
       }
     })
   }
@@ -55,7 +65,10 @@ export default {
 .sessaoplenaria-list {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 40px auto;
+  grid-template-rows: 38px auto;
+  grid-row-gap: 15px;
+  .inner-list {
 
+  }
 }
 </style>

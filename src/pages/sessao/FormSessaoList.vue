@@ -1,33 +1,41 @@
 <template>
-  <div>
-    <b-row>
-      <b-col cols="3">
-        <year-exists-in-model-select class="form-opacity" app="sessao" model="sessaoplenaria" label="Filtre por Ano"></year-exists-in-model-select>
-      </b-col>
-      <b-col cols="3">
-        <month-select class="form-opacity"></month-select>
-      </b-col>
-      <b-col cols="3">
-        <model-select class="form-opacity" app="sessao" model="tiposessaoplenaria" label="Filtre por Tipo de Sessão" choice="nome" ordering="nome"></model-select>
-      </b-col>
-    </b-row>
+  <div class="form-sessao-list">
+      <year-exists-in-model-select class="form-opacity" app="sessao" model="sessaoplenaria" label="Filtre por Ano"></year-exists-in-model-select>
+      <month-select class="form-opacity"></month-select>
+      <model-select class="form-opacity" app="sessao" model="tiposessaoplenaria" label="Filtre por Tipo de Sessão" choice="nome" ordering="nome"></model-select>
+
+      <pagination :pagination="pagination" v-on:nextPage="nextPage" v-on:previousPage="previousPage" v-on:currentPage="currentPage"></pagination>
   </div>
 </template>
 
 <script>
 import YearExistsInModelSelect from '@/components/selects/YearExistsInModelSelect'
+import Pagination from '@/components/Pagination'
 import MonthSelect from '@/components/selects/MonthSelect'
 import ModelSelect from '@/components/selects/ModelSelect'
 export default {
-  name: 'sessao-list',
+  name: 'form-sessao-list',
+  props: ['pagination'],
   components: {
     YearExistsInModelSelect,
     MonthSelect,
-    ModelSelect
+    ModelSelect,
+    Pagination
   },
   data () {
     return {
 
+    }
+  },
+  methods: {
+    currentPage (value) {
+      this.$emit('currentPage', value)
+    },
+    nextPage () {
+      this.$emit('nextPage')
+    },
+    previousPage () {
+      this.$emit('previousPage')
     }
   }
 }
@@ -38,6 +46,22 @@ export default {
   opacity: 0.5;
   &:hover {
     opacity: 1;
+  }
+}
+.form-sessao-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 15px;
+  .form-opacity {
+    opacity: 0.4;
+  }
+  &:hover {
+    .form-opacity {
+      opacity: 0.6;
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 }
 </style>

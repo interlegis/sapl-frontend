@@ -58,7 +58,7 @@ export default {
 }
 
 .grid-template-columns {
-  grid-template-columns: 64px 186px auto 64px;
+  grid-template-columns: 64px 186px auto 0px;
 }
 
 .row-top {
@@ -136,10 +136,10 @@ $padding-space: 1rem;
     background-color: #dddddd;
     border-radius: 50%;
   }
-  header, .sideright, .sideleft {
+  header, .sideleft {
     background-color: rgba($color: #f5f5f5, $alpha: 1);
   }
-  .main, .sideleft {
+  .main, .sideleft, .sideright  {
     background-color: rgba($color: #f0f0f0, $alpha: 1);
     background-image: url("~@/assets/img/bg.png");
   }
@@ -147,7 +147,7 @@ $padding-space: 1rem;
     border-bottom: 1px #ddd solid;
   }
   .sideright {
-    border-left: 1px #ddd solid;
+    // border-left: 1px #ddd solid;
   }
 }
 

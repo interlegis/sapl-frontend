@@ -1,0 +1,84 @@
+<template>
+  <div class="widget-pagination d-flex justify-content-between align-items-center w-100">
+    <span :class="['arrow', pagination.previous_page !== null ? 'hover-circle' : 'disabled']" @click="previousPage">
+      <i class="fas fa-chevron-left"></i>
+    </span>
+    <div class="pages">
+      {{pagination.start_index}}–{{pagination.end_index}} de {{pagination.total_entries}}
+      <div class="inner">
+        <b-pagination align="right" :total-rows="pagination.total_entries" v-model="currentPage" :per-page="10"/>
+      </div>
+    </div>
+    <span class="arrow hover-circle" @click="nextPage">
+      <i class="fas fa-chevron-right"></i>
+    </span>
+
+  </div>
+</template>
+<script>
+export default {
+  name: 'pagination',
+  props: ['pagination'],
+  data () {
+    return {
+      currentPage: this.pagination.page
+    }
+  },
+  watch: {
+    currentPage: function (nv, ov) {
+      this.$emit('currentPage', nv)
+    },
+    pagination: function (nv) {
+      this.currentPage = nv.page
+    }
+  },
+  methods: {
+    nextPage () {
+      this.$emit('nextPage')
+    },
+    previousPage () {
+      this.$emit('previousPage')
+    }
+
+  }
+
+}
+</script>
+<style lang="scss">
+.widget-pagination {
+  background-color: rgba(white, 0.2);
+  border: 1px #dddddd solid;
+  border-radius: 20px;
+  &:hover {
+    background-color: rgba(white, 0.7);
+  }
+  .arrow {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    height: 38px;
+    width: 38px;
+    cursor: pointer;
+  }
+  .disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .pages {
+    position: relative;
+    line-height: 38px;
+    .inner {
+      position: absolute;
+      top: 100%;
+      right: -50px;
+      display: none;
+    }
+    &:hover {
+      .inner {
+        display: inline-block;
+
+      }
+    }
+  }
+}
+</style>
