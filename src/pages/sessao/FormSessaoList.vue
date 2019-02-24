@@ -66,7 +66,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 991px) {
   .form-sessao-list {
     grid-template-columns: 1fr 1fr 1fr;
     grid-row-gap: 15px;

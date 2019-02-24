@@ -1,14 +1,11 @@
 <template>
-  <div class="sessao-plenaria">
-    <h4 class="tit">
+  <div class="sessao-plenaria-item-list">
+    <h6 class="tit">
       {{titulo}}
-    </h4>
-    <div class="sub">
-    {{subtitulo}}
-    </div>
-    <div class="dat-text">
-      {{date_text}}
-    </div>
+    </h6>
+    <small>
+      <span class="sub">{{subtitulo}}</span> – <span class="dat-text">{{date_text}}</span>
+    </small>
   </div>
 </template>
 <script>
@@ -45,7 +42,7 @@ export default {
       return `${this.sessao.numero}ª ${this.tipo.nome} da 
               ${this.data_inicio.getDate() > 15 ? 2 : 1}ª Quizena do Mês de 
               ${this.month_text(this.data_inicio.getMonth())} de 
-              ${this.data_inicio.getFullYear()}.
+              ${this.data_inicio.getFullYear()}
               `
     },
     subtitulo: function () {
@@ -97,14 +94,28 @@ export default {
 }
 </script>
 <style lang="scss">
-.sessao-plenaria {
+.sessao-plenaria-item-list {
     //background-color: rgba($color: #f5f5f5, $alpha: 0.9);
-    text-align: center;
+    //text-align: center;
     background-image: url("~@/assets/img/bg.png");
+    border-bottom: 1px solid #d5d5d5;
     padding: 15px;
+    line-height: 1.2;
     cursor: pointer;
+
+    &:nth-child(odd) {
+     // background-color: rgba($color: #e0e0e0, $alpha: 0.9);
+    }
+
     &:hover {
       background-color: rgba($color: #f5f5f5, $alpha: 0.9);
+    }
+    .sub, .dat-text {
+      color: #777;
+    }
+    h6 {
+      color: #007;
+      margin-bottom: 0px;
     }
 }
 </style>

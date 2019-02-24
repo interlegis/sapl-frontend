@@ -70,7 +70,7 @@ export default {
   .inner-list {
     display: grid;
     grid-template-columns: 1fr;
-    grid-row-gap: 1px;
+    //grid-row-gap: 1px;
   }
 }
 
