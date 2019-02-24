@@ -1,3 +1,2 @@
-
-export const QUEUE_DATA_WS = 'RECEIVE_DATA_FROM_WS'
-export const SHIFT_VALUE = 'SHIFT_VALUE'
+export const REMOVE_FROM_STATE = 'REMOVE_FROM_STATE'
+export const INSERT_IN_STATE = 'INSERT_IN_STATE'

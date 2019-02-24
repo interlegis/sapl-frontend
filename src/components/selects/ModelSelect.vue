@@ -29,6 +29,11 @@ export default {
         .then((response) => {
           _.each(response.data.results, function (item, idx) {
             _this.options.push({ value: item.id, text: item[_this.choice] })
+            _this.insertInState({
+              app: _this.app,
+              model: _this.model,
+              value: item
+            })
           })
           if (response.data.pagination.next_page !== null) {
             _this.fetch(response.data.pagination.next_page)

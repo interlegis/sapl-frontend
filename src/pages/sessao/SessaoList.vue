@@ -68,7 +68,9 @@ export default {
   grid-template-rows: auto auto;
   grid-row-gap: 15px;
   .inner-list {
-
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 1px;
   }
 }
 

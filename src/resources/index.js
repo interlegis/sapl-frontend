@@ -18,5 +18,9 @@ export default {
       url: `${basePath}/${app}/${model}/?page=${page}`,
       method: 'GET'
     }),
+    getModel: (app, model, id) => axios({
+      url: `${basePath}/${app}/${model}/${id}`,
+      method: 'GET'
+    }),
   }
 }
