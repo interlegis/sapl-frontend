@@ -26,6 +26,7 @@ export default {
       legislatura: { numero: '' },
 
       metadata: {
+        sessao: { app: 'sessao', model: 'sessaoplenaria', id: this.sessao.id },
         sessao_legislativa: { app: 'parlamentares', model: 'sessaolegislativa', id: this.sessao.sessao_legislativa },
         legislatura: { app: 'parlamentares', model: 'legislatura', id: this.sessao.legislatura },
         tipo: { app: 'sessao', model: 'tiposessaoplenaria', id: this.sessao.tipo }
@@ -112,6 +113,7 @@ export default {
     this.metadata.sessao_legislativa.id = this.sessao.sessao_legislativa
     this.metadata.tipo.id = this.sessao.tipo
     this.metadata.legislatura.id = this.sessao.legislatura
+
     this.fetch()
   },
   created: function () {
@@ -132,8 +134,8 @@ export default {
     display: block;
     background-image: url("~@/assets/img/bg.png");
     border-bottom: 1px solid #d5d5d5;
-    padding: 15px;
-    line-height: 1.2;
+    padding: 11px;
+    line-height: 1.1;
     cursor: pointer;
 
     &:nth-child(odd) {
