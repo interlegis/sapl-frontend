@@ -51,6 +51,7 @@ export default {
 .form-sessao-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
   grid-column-gap: 15px;
   .form-opacity {
     opacity: 0.4;
@@ -61,6 +62,17 @@ export default {
       &:hover {
         opacity: 1;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .form-sessao-list {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row-gap: 15px;
+    .widget-pagination {
+      grid-column-start: 1;
+      grid-column-end: 4;
     }
   }
 }

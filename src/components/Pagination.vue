@@ -39,9 +39,7 @@ export default {
     previousPage () {
       this.$emit('previousPage')
     }
-
   }
-
 }
 </script>
 <style lang="scss">
@@ -49,6 +47,7 @@ export default {
   background-color: rgba(white, 0.2);
   border: 1px #dddddd solid;
   border-radius: 20px;
+  cursor: pointer;
   &:hover {
     background-color: rgba(white, 0.7);
   }
@@ -72,11 +71,11 @@ export default {
       top: 100%;
       right: -50px;
       display: none;
+      padding-top: 10px;
     }
     &:hover {
       .inner {
         display: inline-block;
-
       }
     }
   }

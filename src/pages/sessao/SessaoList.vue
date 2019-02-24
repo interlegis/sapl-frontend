@@ -65,10 +65,11 @@ export default {
 .sessaoplenaria-list {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 38px auto;
+  grid-template-rows: auto auto;
   grid-row-gap: 15px;
   .inner-list {
 
   }
 }
+
 </style>
