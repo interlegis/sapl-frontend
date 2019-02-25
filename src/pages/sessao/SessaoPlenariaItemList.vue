@@ -32,6 +32,12 @@ export default {
       }
     }
   },
+  watch: {
+    sessao: function (nv) {
+      this.updateSessao()
+      this.fetch()
+    }
+  },
   computed: {
     titulo: function () {
       let sessao = this.sessao
@@ -105,14 +111,16 @@ export default {
           }
         }
       })
+    },
+    updateSessao () {
+      this.data_inicio = this.stringToDate(this.sessao.data_inicio, 'yyyy-mm-dd', '-')
+      this.metadata.sessao_legislativa.id = this.sessao.sessao_legislativa
+      this.metadata.tipo.id = this.sessao.tipo
+      this.metadata.legislatura.id = this.sessao.legislatura
     }
   },
   mounted: function () {
-    this.data_inicio = this.stringToDate(this.sessao.data_inicio, 'yyyy-mm-dd', '-')
-    this.metadata.sessao_legislativa.id = this.sessao.sessao_legislativa
-    this.metadata.tipo.id = this.sessao.tipo
-    this.metadata.legislatura.id = this.sessao.legislatura
-
+    this.updateSessao()
     this.fetch()
   }
 
