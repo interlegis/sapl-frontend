@@ -27,9 +27,11 @@ dotenv.config({
 
 var FRONTEND_CUSTOM = process.env.FRONTEND_CUSTOM === undefined ? false : process.env.FRONTEND_CUSTOM === "True"
 
+var HOST_NAME = 'localhost'
+
 module.exports = {
   runtimeCompiler: true,
-  publicPath: process.env.NODE_ENV === 'production' ? '/static/sapl/' : 'http://192.168.15.7:8080/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/static/sapl/' : `http://${HOST_NAME}:8080/`,
   outputDir: FRONTEND_CUSTOM ? 'dist' : '../sapl/sapl/static/sapl/',
 
   chainWebpack: config => {
@@ -84,7 +86,7 @@ module.exports = {
 
     config.devServer
       .public('')
-      .host('192.168.15.7')
+      .host(HOST_NAME)
       .port(8080)
       .hot(true)
       .watchOptions({

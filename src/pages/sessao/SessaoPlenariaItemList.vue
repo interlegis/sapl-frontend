@@ -120,31 +120,44 @@ export default {
 </script>
 <style lang="scss">
 .sessao-plenaria-item-list {
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-items: stretch;
-    align-items: center;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-items: stretch;
+  align-items: center;
 
-    background-image: url("~@/assets/img/bg.png");
-    border-bottom: 1px solid #d5d5d5;
-    padding: 15px;
+  background-image: url("~@/assets/img/bg.png");
+  border-bottom: 1px solid #d5d5d5;
+  padding: 15px;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($color: #f5f5f5, $alpha: 0.9);
+    text-decoration: none;
+  }
+  .subtitulo {
+    color: #777;
+    display: inline-block;
+    text-align: right;
     line-height: 1;
-    cursor: pointer;
-
-    &:hover {
-      background-color: rgba($color: #f5f5f5, $alpha: 0.9);
-      text-decoration: none;
+  }
+  h5 {
+    line-height: 1;
+    color: #007;
+    margin-bottom: 0px;
+  }
+}
+@media screen and (max-width: 1199px) {
+  .sessao-plenaria-item-list {
+    grid-template-columns: auto;
+    line-height: 1.3;
+    h5 {
+      font-size: 110%;
     }
     .subtitulo {
-      color: #777;
-      display: inline-block;
-      text-align: right;
-      line-height: 1;
+    line-height: 1.6;
+      text-align: left;
     }
-    h5 {
-      line-height: 1;
-      color: #007;
-      margin-bottom: 0px;
-    }
+  }
 }
 </style>
