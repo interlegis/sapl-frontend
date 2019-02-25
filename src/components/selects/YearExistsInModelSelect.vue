@@ -7,9 +7,12 @@
 <script>
 
 import Resources from '@/resources'
-import { EventBus } from '@/event-bus'
 
 export default {
+  /**
+   * Componente que cria select para qualquer model do Sapl que
+   * em sua api rest possua a action years e devolva um array de dict {value, text}
+   */
   name: 'year-exists-in-model-select',
   props: ['app', 'model', 'label'],
   data () {
@@ -24,11 +27,19 @@ export default {
   },
   watch: {
     selected: function (nv, ov) {
+      /**
+       * Comunica ao parent que houve alteracão na selecao
+       */
       this.$emit('change', nv)
     }
   },
   methods: {
     fetch () {
+      /**
+       * Busca:
+       *   /api/[app]/[model]/years
+       *
+       */
       this.utils.getYearsChoiceList(this.app, this.model)
         .then((response) => {
           this.options = response.data
@@ -39,13 +50,7 @@ export default {
     }
   },
   created: function () {
-    let _this = this
-    _this.fetch()
-    EventBus.$on('ws-message', function (data) {
-      if (data.message.app === _this.app && data.message.model === _this.model) {
-        _this.fetch()
-      }
-    })
+    this.fetch()
   }
 }
 </script>

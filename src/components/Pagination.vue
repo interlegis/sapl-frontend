@@ -68,6 +68,7 @@ export default {
   .pages {
     line-height: 38px;
     position: static;
+    user-select: none;
     .inner {
       z-index: 1;
       position: absolute;

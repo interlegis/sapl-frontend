@@ -1,10 +1,14 @@
 <template>
   <div class="sessao-plenaria-online">
-    <sessao-plenaria-item-list v-for="(item, key) in sessao" :key="key" :sessao="item"></sessao-plenaria-item-list>
+    <div  v-if="sessao" >
+    <sessao-plenaria-item-list :sessao="sessao"></sessao-plenaria-item-list>
+
+    </div>
   </div>
 </template>
 <script>
 import SessaoPlenariaItemList from './SessaoPlenariaItemList'
+import Resources from '@/resources'
 export default {
   name: 'sessao-plenaria-online',
   components: {
@@ -12,7 +16,8 @@ export default {
   },
   data () {
     return {
-      sessao: []
+      utils: Resources.Utils,
+      sessao: null
     }
   },
   mounted: function () {
@@ -30,15 +35,26 @@ export default {
         .insertInState(meta)
         .then(() => {
           sessao = _this.getModel(meta)
-          this.sessao.push(sessao[id])
+          this.sessao = sessao[id]
         })
     } else {
-      this.sessao.push(sessao[id])
+      this.sessao = sessao[id]
     }
+  },
+  methods: {
+
+  },
+  created: function () {
+
   }
 }
 </script>
 
 <style lang="scss">
+.sessao-plenaria-online {
+  .sessao-plenaria-item-list {
+    padding: 10px;
+  }
 
+}
 </style>

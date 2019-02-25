@@ -6,13 +6,7 @@
 
 <script>
 export default {
-  name: 'sessao-plenaria-module',
-  components: {
-  },
-  data () {
-    return {
-    }
-  }
+  name: 'sessao-plenaria-module'
 }
 </script>
 

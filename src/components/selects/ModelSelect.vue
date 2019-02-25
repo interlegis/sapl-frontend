@@ -7,7 +7,6 @@
 <script>
 
 import Resources from '@/resources'
-import { EventBus } from '@/event-bus'
 
 export default {
   name: 'model-select',
@@ -49,16 +48,7 @@ export default {
     }
   },
   created: function () {
-    let _this = this
-    _this.fetch()
-    EventBus.$on('ws-message', function (data) {
-      if (data.message.app === _this.app && data.message.model === _this.model) {
-        _this.options = [
-          { value: null, text: _this.label }
-        ]
-        _this.fetch(1)
-      }
-    })
+    this.fetch()
   }
 }
 </script>

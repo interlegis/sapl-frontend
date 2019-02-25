@@ -1,22 +1,22 @@
 <template>
   <router-link :class="'sessao-plenaria-item-list'" :to="{ name: 'sessao_plenaria_online_link', params: {id: sessao.id} }" @click.native="sendStore">
-    <h6 class="tit">
+    <h5 class="tit">
       {{titulo}}
-    </h6>
-    <small>
-      <span class="sub">{{subtitulo}}</span> – <span class="dat-text">{{date_text}}</span>
-    </small>
+    </h5>
+    <div class="subtitulo">
+      <span>{{subtitulo}}</span> – <span>{{date_text}}</span>
+    </div>
   </router-link>
 </template>
 <script>
 import Resources from '@/resources'
-import { EventBus } from '@/event-bus'
 export default {
   name: 'sessao-plenaria-item-list',
   props: ['sessao'],
   data () {
     return {
       utils: Resources.Utils,
+
       app: ['sessao', 'parlamentares'],
       model: ['sessaoplenaria', 'sessaolegislativa', 'tiposessaoplenaria', 'legislatura'],
 
@@ -26,7 +26,6 @@ export default {
       legislatura: { numero: '' },
 
       metadata: {
-        sessao: { app: 'sessao', model: 'sessaoplenaria', id: this.sessao.id },
         sessao_legislativa: { app: 'parlamentares', model: 'sessaolegislativa', id: this.sessao.sessao_legislativa },
         legislatura: { app: 'parlamentares', model: 'legislatura', id: this.sessao.legislatura },
         tipo: { app: 'sessao', model: 'tiposessaoplenaria', id: this.sessao.tipo }
@@ -115,41 +114,35 @@ export default {
     this.metadata.legislatura.id = this.sessao.legislatura
 
     this.fetch()
-  },
-  created: function () {
-    let _this = this
-    EventBus.$on('ws-message', function (data) {
-      if (_.indexOf(_this.app, data.message.app) !== -1 &&
-          _.indexOf(_this.model, data.message.model) !== -1) {
-        _this.fetch()
-      }
-    })
   }
+
 }
 </script>
 <style lang="scss">
 .sessao-plenaria-item-list {
-    //background-color: rgba($color: #f5f5f5, $alpha: 0.9);
-    //text-align: center;
-    display: block;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: stretch;
+    align-items: center;
+
     background-image: url("~@/assets/img/bg.png");
     border-bottom: 1px solid #d5d5d5;
-    padding: 11px;
-    line-height: 1.1;
+    padding: 15px;
+    line-height: 1;
     cursor: pointer;
-
-    &:nth-child(odd) {
-     // background-color: rgba($color: #e0e0e0, $alpha: 0.9);
-    }
 
     &:hover {
       background-color: rgba($color: #f5f5f5, $alpha: 0.9);
       text-decoration: none;
     }
-    .sub, .dat-text {
+    .subtitulo {
       color: #777;
+      display: inline-block;
+      text-align: right;
+      line-height: 1;
     }
-    h6 {
+    h5 {
+      line-height: 1;
       color: #007;
       margin-bottom: 0px;
     }

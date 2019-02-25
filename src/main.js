@@ -16,9 +16,11 @@ import VuexStore from './store'
 import axios from 'axios'
 
 import { sync } from 'vuex-router-sync'
-import { routes } from './routers'
 import { loadProgressBar } from 'axios-progress-bar'
 import 'axios-progress-bar/dist/nprogress.css'
+
+import { routes } from './routers'
+import { EventBus } from '@/event-bus'
 
 import App from './App'
 
@@ -30,12 +32,23 @@ Vue.use(Router)
 Vue.use(BootstrapVue)
 
 Vue.use(VueNativeSock, 'ws://' + window.location.host + '/ws/time-refresh/', {
+  /*
+  ws/time-refresh recebe uma notificacão sempre que um model do Sapl
+  é alterado. Um JSON é enviado pelo servidor no formato:
+  {
+    action: 'post_save' | 'post_delete',
+    id: 9999, // 9999 - pk do model alterado
+    app: 'app_name', // de que app é esse id
+    model; 'model_name', // de que model é esse id
+  }
+  */
   reconnection: true // (Boolean) whether to reconnect automatically (false)
   // reconnectionAttempts: 5, // (Number) number of reconnection attempts before giving up (Infinity),
   // reconnectionDelay: 3000, // (Number) how long to initially wait before attempting a new (1000)
 })
 
 loadProgressBar()
+
 
 Vue.mixin({
 
@@ -61,7 +74,35 @@ Vue.mixin({
       month-=1;
       var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
       return formatedDate;
+    },
+    on_ws_message (data) {
+      let _this = this
+
+      if (!_this.hasOwnProperty('app') || !_this.hasOwnProperty('model'))
+        return
+
+      if (Array.isArray(_this.app) && Array.isArray(_this.model)) {
+        if (_.indexOf(_this.app, data.message.app) !== -1 &&
+            _.indexOf(_this.model, data.message.model) !== -1) {
+          _this.fetch()
+        }
+      }
+      else {
+        if (data.message.app === _this.app && data.message.model === _this.model) {
+          _this.fetch()
+        }
+      }
     }
+  },
+  created: function () {
+    /*
+      Observador para o WebSocket...
+      O Componente que se interesse por monitorar notificacões vindas
+      do servidor de que um model possui alteracão, basta implementar
+      o método on_ws_message.
+    */
+    let _this = this
+    EventBus.$on('ws-message', _this.on_ws_message )
   }
 })
 

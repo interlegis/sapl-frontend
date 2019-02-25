@@ -1,11 +1,14 @@
 <template>
   <div class="sessaoplenaria-list">
+
     <form-sessao-list
       :pagination="pagination"
       v-on:nextPage="nextPage"
       v-on:previousPage="previousPage"
       v-on:currentPage="currentPage"
-      v-on:changeFilter="changeFilter"></form-sessao-list>
+      v-on:changeFilter="changeFilter">
+    </form-sessao-list>
+
     <div class="inner-list">
       <sessao-plenaria-item-list :sessao="item" v-for="(item, key) in sessoes" :key="key"></sessao-plenaria-item-list>
       <div class="empty-list" v-if="sessoes.length === 0 && init">
@@ -19,7 +22,6 @@
 </template>
 
 <script>
-import { EventBus } from '@/event-bus'
 import Resources from '@/resources'
 import FormSessaoList from './FormSessaoList'
 import SessaoPlenariaItemList from './SessaoPlenariaItemList'
@@ -33,8 +35,13 @@ export default {
     return {
       utils: Resources.Utils,
       init: false,
+
+      /**
+       * monitora mudanças nestes models
+       */
       app: ['sessao'],
       model: ['sessaoplenaria', 'tiposessaoplenaria'],
+
       ordering: '-data_inicio, -hora_inicio, -id',
       sessoes: [],
       pagination: {},
@@ -59,8 +66,12 @@ export default {
       this.form_filter = form_filter
       this.fetch(1)
     },
-    fetch (page) {
+    fetch (page = null) {
       let _this = this
+
+      if (page === null) {
+        page = _this.pagination.page
+      }
 
       let query_string = ''
       let ff = this.form_filter
@@ -94,12 +105,6 @@ export default {
   created: function () {
     let _this = this
     _this.fetch(1)
-    EventBus.$on('ws-message', function (data) {
-      if (_.indexOf(_this.app, data.message.app) !== -1 &&
-          _.indexOf(_this.model, data.message.model) !== -1) {
-        _this.fetch(_this.pagination.page)
-      }
-    })
   }
 }
 </script>
