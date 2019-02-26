@@ -168,8 +168,9 @@ small {
     }
   }
 }
-
-
+.mce-branding.mce-label {
+  display: none;
+}
 
 @media print {
   a[href]:after {

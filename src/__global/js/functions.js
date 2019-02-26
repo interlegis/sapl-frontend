@@ -14,10 +14,11 @@ window.initTextRichEditor = function (elements, readonly = false) {
     'forced_root_block': '',
     'content_style': skinTinymce.contentStyle,
     'skin': false,
-    'plugins': ['table save code'],
-    'menubar': 'edit format table tools',
+    'plugins': ['lists table code'],
+    'menubar': 'file edit view format table tools',
     toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
-    'tools': 'inserttable'
+    min_height: 200
+
   }
 
   if (readonly) {

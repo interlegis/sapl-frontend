@@ -14,10 +14,12 @@ import 'jquery-ui/ui/i18n/datepicker-pt-BR'
 import 'jquery-ui-themes/themes/cupertino/jquery-ui.min.css'
 
 import 'tinymce/tinymce'
-import 'tinymce/themes/modern/theme'
+import './js/tinymce/lang/pt_BR.js'
+
+import 'tinymce/themes/modern'
 import 'tinymce/plugins/table'
+import 'tinymce/plugins/lists'
 import 'tinymce/plugins/code'
-import 'tinymce/plugins/save'
 
 import 'jquery-mask-plugin'
 
@@ -25,6 +27,7 @@ import './scss/app.scss'
 
 import './js/image_cropping'
 import './js/functions'
+
 // eslint-disable-next-line
 require('imports-loader?window.jQuery=jquery!./js/jquery.runner.js')
 
