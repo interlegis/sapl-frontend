@@ -32,7 +32,7 @@ Vue.use(Vuex)
 Vue.use(Router)
 Vue.use(BootstrapVue)
 
-Vue.use(VueNativeSock, 'ws://' + window.location.host + '/ws/time-refresh/', {
+Vue.use(VueNativeSock, (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + '/ws/time-refresh/', {
   /*
   ws/time-refresh recebe uma notificacão sempre que um model do Sapl
   é alterado. Um JSON é enviado pelo servidor no formato:
