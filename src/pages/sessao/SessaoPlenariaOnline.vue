@@ -66,10 +66,11 @@ export default {
 <style lang="scss">
 .sessao-plenaria-online {
   .sessao-plenaria-item-list {
-    grid-template-columns: auto;
     padding: 5px;
     .subtitulo {
-      text-align: left;
+      .separator {
+        display: inline;
+      }
     }
   }
 

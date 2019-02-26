@@ -4,7 +4,7 @@
       {{titulo}}
     </h5>
     <div class="subtitulo">
-      <span>{{subtitulo}}</span> – <span>{{date_text}}</span>
+      <span>{{subtitulo}}</span><span class="separator"> – </span><span>{{date_text}}</span>
     </div>
   </router-link>
 </template>
@@ -56,7 +56,7 @@ export default {
     date_text: function () {
       return `${this.data_inicio.getDate()} de 
               ${this.month_text(this.data_inicio.getMonth())} de
-              ${this.data_inicio.getFullYear()} - ${this.sessao.hora_inicio}`
+              ${this.data_inicio.getFullYear()} – ${this.sessao.hora_inicio}`
     }
   },
   methods: {
@@ -130,8 +130,6 @@ export default {
 .sessao-plenaria-item-list {
   display: grid;
   grid-template-columns: auto auto;
-  justify-items: stretch;
-  align-items: center;
 
   background-image: url("~@/assets/img/bg.png");
   border-bottom: 1px solid #d5d5d5;
@@ -147,7 +145,12 @@ export default {
     color: #777;
     display: inline-block;
     text-align: right;
-    line-height: 1;
+    line-height: 1.2;
+    .separator {
+      display: block;
+      height: 0px;
+      overflow: hidden;
+    }
   }
   h5 {
     line-height: 1;
@@ -163,7 +166,7 @@ export default {
       font-size: 110%;
     }
     .subtitulo {
-    line-height: 1.6;
+      line-height: 1;
       text-align: left;
     }
   }

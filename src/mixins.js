@@ -9,8 +9,8 @@ Vue.mixin({
 
   computed: {
     ...Vuex.mapGetters([
-      'getModel',
-    ]),
+      'getModel'
+    ])
   },
   methods: {
     ...Vuex.mapActions([
@@ -18,31 +18,31 @@ Vue.mixin({
       'removeFromState',
       'insertInState'
     ]),
-    stringToDate: function (_date,_format,_delimiter) {
-      var formatLowerCase=_format.toLowerCase();
-      var formatItems=formatLowerCase.split(_delimiter);
-      var dateItems=_date.split(_delimiter);
-      var monthIndex=formatItems.indexOf("mm");
-      var dayIndex=formatItems.indexOf("dd");
-      var yearIndex=formatItems.indexOf("yyyy");
-      var month=parseInt(dateItems[monthIndex]);
-      month-=1;
-      var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
-      return formatedDate;
+    stringToDate: function (_date, _format, _delimiter) {
+      var formatLowerCase = _format.toLowerCase()
+      var formatItems = formatLowerCase.split(_delimiter)
+      var dateItems = _date.split(_delimiter)
+      var monthIndex = formatItems.indexOf('mm')
+      var dayIndex = formatItems.indexOf('dd')
+      var yearIndex = formatItems.indexOf('yyyy')
+      var month = parseInt(dateItems[monthIndex])
+      month -= 1
+      var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex])
+      return formatedDate
     },
     on_ws_message (data) {
       let _this = this
 
-      if (!_this.hasOwnProperty('app') || !_this.hasOwnProperty('model'))
+      if (!_this.hasOwnProperty('app') || !_this.hasOwnProperty('model')) {
         return
+      }
 
       if (Array.isArray(_this.app) && Array.isArray(_this.model)) {
         if (_.indexOf(_this.app, data.message.app) !== -1 &&
             _.indexOf(_this.model, data.message.model) !== -1) {
           _this.fetch()
         }
-      }
-      else {
+      } else {
         if (data.message.app === _this.app && data.message.model === _this.model) {
           _this.fetch()
         }
@@ -57,6 +57,6 @@ Vue.mixin({
       o método on_ws_message.
     */
     let _this = this
-    EventBus.$on('ws-message', _this.on_ws_message )
+    EventBus.$on('ws-message', _this.on_ws_message)
   }
 })
