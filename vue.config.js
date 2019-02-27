@@ -127,9 +127,9 @@ module.exports = {
       .add('./src/__apps/painel/main.js')
       .end()
 
-    /* config.entry('online')
+    config.entry('online')
       .add('./src/main.js')
-      .end() */
+      .end()
 
   },
 }
