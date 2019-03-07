@@ -208,11 +208,21 @@ window.DispositivoEdit = function () {
       dpt.find('.btn-compila').on('click', instance.loadFormsCompilacao)
       dpt.find('.btn-editor-type').on('click', instance.bindActionsEditorType)
 
-      if (editortype === 'construct') { dpt.find('.btn-group-inserts').first().addClass('open') }
+      if (editortype === 'construct') {
+        dpt.find('.btn-group-inserts').first().addClass('open show') 
+        dpt.find('.btn-group-inserts ul').first().addClass('show') 
+      }
 
       dpt.find('.btn-group-inserts button').mouseenter(function (event) {
-        dpt.find('.btn-group-inserts').removeClass('open')
-        _$(this.parentElement).addClass('open')
+        dpt.find('.btn-group-inserts ul').removeClass('show')
+        dpt.find('.btn-group-inserts').removeClass('open show')
+        _$(this.parentElement).addClass('open show')
+        _$(this.parentElement).find('ul').addClass('show') 
+      })
+
+      dpt.find('.btn-group-inserts').mouseleave(function (event) {
+        dpt.find('.btn-group-inserts ul').removeClass('show')
+        dpt.find('.btn-group-inserts').removeClass('open show')
       })
 
       instance.gc()
