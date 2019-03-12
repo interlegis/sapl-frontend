@@ -41,3 +41,35 @@
     }
   }
 }
+@media (max-width: 767px) {
+  .masthead {
+    text-align: center;
+    .container {
+      max-width: 100%;
+      padding: 0;
+    }
+    .navbar-brand {
+      white-space: normal;
+      margin: 0;
+      .vcenter {
+        display: block;
+        line-height: 1em;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .masthead {
+    .navbar-brand {
+      font-size: 1.2rem;
+    }
+  }
+}
+@media (max-width: 360px) {
+  .masthead {
+    .navbar-brand {
+      font-size: 1rem;
+    }
+  }
+}

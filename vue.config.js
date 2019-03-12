@@ -86,7 +86,6 @@ module.exports = {
 
     config.devServer
       .public('')
-      .host(HOST_NAME)
       .port(8080)
       .hot(true)
       .watchOptions({
