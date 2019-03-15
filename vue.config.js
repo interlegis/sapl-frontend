@@ -31,8 +31,8 @@ var HOST_NAME = 'localhost'
 
 module.exports = {
   runtimeCompiler: true,
-  publicPath: process.env.NODE_ENV === 'production' ? '/static/sapl/' : `http://${HOST_NAME}:8080/`,
-  outputDir: FRONTEND_CUSTOM ? 'dist' : '../sapl/sapl/static/sapl/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/static/sapl/frontend' : `http://${HOST_NAME}:8080/`,
+  outputDir: FRONTEND_CUSTOM ? 'dist' : '../sapl/sapl/static/sapl/frontend',
 
   chainWebpack: config => {
     config.plugins.delete('html')
