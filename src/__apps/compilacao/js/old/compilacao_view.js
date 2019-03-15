@@ -31,8 +31,8 @@ function textoMultiVigente (item, diff) {
     }
   }
 
-  _$('.cp .tipo-vigencias a').removeClass('selected')
-  _$(item).addClass('selected')
+  _$('.cp .tipo-vigencias a').removeClass('active')
+  _$(item).addClass('active')
   _$('.dptt.desativado').removeClass('displaynone')
   _$('.dtxt').removeClass('displaynone')
   _$('.dtxt.diff').remove()
@@ -127,9 +127,8 @@ function textoVigente (item, link) {
     }
   }
 
-  _$('.cp .tipo-vigencias a').removeClass('selected')
-  _$(item).addClass('selected')
-
+  _$('.cp .tipo-vigencias a').removeClass('active')
+  _$(item).addClass('active')
   _$('.dptt.desativado').addClass('displaynone')
   _$('.nota-alteracao').removeClass('displaynone')
   if (!link) _$('.nota-alteracao').addClass('displaynone')

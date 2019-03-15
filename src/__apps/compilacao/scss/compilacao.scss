@@ -650,6 +650,12 @@ a:link:after, a:visited:after {
   }
 } /* end cp */
 
+.cp-print {
+  .cp-linha-vigencias {
+    display: none !important;
+  }
+}
+
 .cp.cpe {
   .desativado {
     text-decoration: line-through;
@@ -1703,8 +1709,15 @@ a:link:after, a:visited:after {
 }
 
 @media print {
-  .cp .vigencias, .toggle-topbar, .menu-icon, .button, .tipo-vigencias, .dne {
-    display:none;
+  .cp .vigencias, 
+  .toggle-topbar, 
+  .menu-icon, 
+  .button, 
+  .tipo-vigencias, 
+  .dne,
+  .cp-linha-vigencias, 
+  .tipo-vigencias {
+    display:none !important;
   }
   #btn_font_menos, #btn_font_mais {
     display:none;
