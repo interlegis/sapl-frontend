@@ -90,6 +90,7 @@ window.autorModal = function () {
 
       clean_if_exists('#id_autor')
       clean_if_exists('#id_autoria__autor')
+      clean_if_exists('#id_autorianorma__autor')
     })
 
     $('#button-id-pesquisar').click(function () {
@@ -156,6 +157,10 @@ window.autorModal = function () {
           // Protocolo pesquisa a própria tabela de Autor
           if ($('#id_autor').length) {
             $('#id_autor').val(id)
+          }
+          // MateriaLegislativa pesquisa Autor via a tabela AutoriaNorma
+          if ($('#id_autorianorma__autor').length) {
+            $('#id_autorianorma__autor').val(id)
           }
 
           dialog.dialog('close')
