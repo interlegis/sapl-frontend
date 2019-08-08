@@ -12,6 +12,7 @@
     "axios": "^0.18.0",
     "axios-progress-bar": "^1.2.0",
     "bootstrap": "^4.3.1",
+    "bootstrap-multiselect": "^0.9.13-1",
     "bootstrap-vue": "^2.0.0-rc.12",
     "diff": "^4.0.1",
     "dotenv": "^6.2.0",

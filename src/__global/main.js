@@ -22,6 +22,7 @@ import 'tinymce/plugins/lists'
 import 'tinymce/plugins/code'
 
 import 'jquery-mask-plugin'
+import 'bootstrap-multiselect'
 
 import './scss/app.scss'
 
