@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "axios-progress-bar": "^1.2.0",
     "bootstrap": "^4.3.1",
     "bootstrap-multiselect": "^0.9.13-1",
@@ -21,7 +21,7 @@
     "jquery": "^3.3.1",
     "jquery-mask-plugin": "^1.14.15",
     "jquery-ui-themes": "^1.12.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "popper.js": "^1.14.7",
     "register-service-worker": "^1.6.1",
     "tinymce": "^4.9.2",
