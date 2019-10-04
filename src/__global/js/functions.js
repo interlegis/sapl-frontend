@@ -62,6 +62,74 @@ window.getCookie = function (name) {
   return cookieValue
 }
 
+window.proposicaoModal = function () {
+  $(function () {
+    var dialog = $('#modal_proposicao').dialog({
+      autoOpen: false,
+      modal: true,
+      width: 500,
+      height: 340,
+      show: {
+        effect: 'blind',
+        duration: 500
+      },
+      hide: {
+        effect: 'explode',
+        duration: 500
+      }
+    })
+
+    $('#button-id-pesquisar-cod-proposicao').click(function (){
+      $('#q').val('')
+      $('#div-resultado')
+        .children()
+        .remove()
+      $('#modal_proposicao').dialog('open')
+      $('#selecionar').attr('hidden', 'hidden')
+    })
+
+    $('#pesquisar-proposicao').click(function () {
+      var name_in_query = $('#q').val()
+
+      $.get('/materia/recuperar-proposicao?data=' + name_in_query, function (data) {
+        $('#div-resultado')
+          .children()
+          .remove()
+        if (data.hash_codes.length === 0) {
+          $('#selecionar').attr('hidden', 'hidden')
+          $('#div-resultado').html(
+            "<span class='alert'><strong>Nenhum resultado</strong></span>"
+          )
+          return
+        }
+
+        var select = $(
+          '<select id="resultados" style="min-width: 90%; max-width:90%;" size="5"/>'
+        )
+
+        data.hash_codes.forEach(function (item) {
+          select.append(
+            $('<option>').text(item)
+          )
+        })
+
+        $('#div-resultado')
+          .append('<br/>')
+          .append(select)
+        $('#selecionar').removeAttr('hidden', 'hidden')
+
+
+        $('#selecionar').click(function () {
+          let res = $('#resultados option:selected')
+          let cod_hash = res.text()
+          $('input[name ="cod_hash"]').val(cod_hash)
+          dialog.dialog('close')
+        })
+      })
+    })
+  })
+}
+
 window.autorModal = function () {
   $(function () {
     var dialog = $('#modal_autor').dialog({
