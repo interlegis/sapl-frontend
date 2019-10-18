@@ -117,7 +117,8 @@ window.DispositivoEdit = function () {
     let url_search = dpt_form[0]['id_dispositivo_search_form'].value
     window.DispositivoSearch({
       'url_form': url_search,
-      'text_button': 'Selecionar'
+      'text_button': 'Selecionar',
+      autostart: true
     })
 
     instance.scrollTo(_this)
@@ -142,7 +143,8 @@ window.DispositivoEdit = function () {
       'url_form': url_search,
       'text_button': 'Selecionar',
       'post_selected': instance.allowed_inserts_registro_inclusao,
-      'params_post_selected': { 'pk_bloco': _this.attr('pk') }
+      'params_post_selected': { 'pk_bloco': _this.attr('pk') },
+      autostart: true
 
     })
 
@@ -166,7 +168,8 @@ window.DispositivoEdit = function () {
     let url_search = dpt_form[0]['id_dispositivo_search_form'].value
     window.DispositivoSearch({
       'url_form': url_search,
-      'text_button': 'Selecionar'
+      'text_button': 'Selecionar',
+      autostart: true
     })
 
     instance.scrollTo(_this)
@@ -209,15 +212,15 @@ window.DispositivoEdit = function () {
       dpt.find('.btn-editor-type').on('click', instance.bindActionsEditorType)
 
       if (editortype === 'construct') {
-        dpt.find('.btn-group-inserts').first().addClass('open show') 
-        dpt.find('.btn-group-inserts ul').first().addClass('show') 
+        dpt.find('.btn-group-inserts').first().addClass('open show')
+        dpt.find('.btn-group-inserts ul').first().addClass('show')
       }
 
       dpt.find('.btn-group-inserts button').mouseenter(function (event) {
         dpt.find('.btn-group-inserts ul').removeClass('show')
         dpt.find('.btn-group-inserts').removeClass('open show')
         _$(this.parentElement).addClass('open show')
-        _$(this.parentElement).find('ul').addClass('show') 
+        _$(this.parentElement).find('ul').addClass('show')
       })
 
       dpt.find('.btn-group-inserts').mouseleave(function (event) {
@@ -537,7 +540,7 @@ window.DispositivoEdit = function () {
   instance.triggerBtnDptEdit = function (pk) {
     let btn_dpt_edit = _$('#id' + pk + ' > .dpt-text.btn-dpt-edit')
     if (btn_dpt_edit.length === 0) { btn_dpt_edit = _$('#id' + pk + ' > .dpt-actions-fixed > .btn-dpt-edit') }
-    btn_dpt_edit.trigger('click')
+    btn_dpt_edit.first().trigger('click')
   }
   instance.waitHide = function () {
     _$('#wait_message').addClass('displaynone')
