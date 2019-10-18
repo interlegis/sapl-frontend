@@ -34,6 +34,8 @@ function textoMultiVigente (item, diff) {
   _$('.cp .tipo-vigencias a').removeClass('active')
   _$(item).addClass('active')
   _$('.dptt.desativado').removeClass('displaynone')
+  _$('.desativado > .dn').removeClass('displaynone')
+  _$('.dptt.revogado').removeClass('displaynone')
   _$('.dtxt').removeClass('displaynone')
   _$('.dtxt.diff').remove()
   _$('.nota-alteracao').removeClass('displaynone')
@@ -130,7 +132,9 @@ function textoVigente (item, link) {
   _$('.cp .tipo-vigencias a').removeClass('active')
   _$(item).addClass('active')
   _$('.dptt.desativado').addClass('displaynone')
+  _$('.desativado > .dn').addClass('displaynone')
   _$('.nota-alteracao').removeClass('displaynone')
+  _$('.dptt.revogado').removeClass('displaynone')
   if (!link) _$('.nota-alteracao').addClass('displaynone')
 
   if (elv) {
@@ -150,8 +154,14 @@ function textoVigente (item, link) {
   }
 }
 
+function textoVigenteSemRevogados (item, link) {
+  textoVigente(item, link)
+  _$('.dptt.revogado').addClass('displaynone')
+}
+
 export default {
   isElementInViewport,
   textoMultiVigente,
-  textoVigente
+  textoVigente,
+  textoVigenteSemRevogados
 }
