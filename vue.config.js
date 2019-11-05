@@ -138,6 +138,10 @@ module.exports = {
       .add('./src/__apps/sessao/main.js')
       .end()
 
+    config.entry('parlamentar')
+      .add('./src/__apps/parlamentar/main.js')
+      .end()
+        
     config.entry('online')
       .add('./src/main.js')
       .end()
