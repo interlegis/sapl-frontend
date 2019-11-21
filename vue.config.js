@@ -126,6 +126,10 @@ module.exports = {
       .add('./src/__global/main.js')
       .end()
 
+    config.entry('parlamentares')
+      .add('./src/__apps/parlamentares/main.js')
+      .end()
+
     config.entry('compilacao')
       .add('./src/__apps/compilacao/main.js')
       .end()
