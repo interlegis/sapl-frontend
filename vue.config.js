@@ -1,6 +1,7 @@
 const path = require('path')
 const each = require('lodash/fp/each')
 
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const BundleTrackerPlugin = require('webpack-bundle-tracker')
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -44,6 +45,13 @@ module.exports = {
       .use(RelativeBundleTrackerPlugin, [{
         path: '.',
         filename: FRONTEND_CUSTOM ? './webpack-stats.json' : '../sapl/sapl/webpack-stats.json'
+      }])
+
+
+    config
+      .plugin('MomentLocalesPlugin')
+      .use(MomentLocalesPlugin, [{
+        localesToKeep: ['pt-BR'],
       }])
 
     if (process.env.NODE_ENV === 'production') {

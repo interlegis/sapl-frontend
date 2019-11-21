@@ -30,11 +30,18 @@ import './scss/app.scss'
 import './js/image_cropping'
 import './js/functions'
 
+
+import * as moment from 'moment'
+import 'moment/locale/pt-br';
+
+
 // eslint-disable-next-line
 require('imports-loader?window.jQuery=jquery!./js/jquery.runner.js')
 
 window.$ = $
 window.jQuery = $
+
+window.moment = moment
 
 window.autorModal()
 window.refreshMask()
