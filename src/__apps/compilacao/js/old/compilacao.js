@@ -280,9 +280,53 @@ function DispositivoSearch (opts) {
   })
 }
 
+function InitViewTAs () {
+  setTimeout(function () {
+    var href = location.href.split('#')
+    if (href.length === 2) {
+      try {
+        $('html, body').animate(
+          {
+            scrollTop:
+              $('#dptt' + href[1]).offset().top - window.innerHeight / 9
+          },
+          0
+        )
+      } catch (err) {
+        // console.log(err)
+      }
+    }
+  }, 100)
+
+  $('#btn_font_menos').click(function () {
+    $('.dpt').css('font-size', '-=1')
+  })
+  $('#btn_font_mais').click(function () {
+    $('.dpt').css('font-size', '+=1')
+  })
+
+  $('.dpt.bloco_alteracao .dpt').each(function () {
+    var nivel = parseInt($(this).attr('nivel'))
+    $(this).css('z-index', 15 - nivel)
+  })
+
+  $('.cp-linha-vigencias > li:not(:first-child):not(:last-child) > a').click(function (event) {
+    $('.cp-linha-vigencias > li').removeClass('active')
+    $(this).closest('li').addClass('active')
+    event.preventDefault()
+  })
+
+  $('main').click(function (event) {
+    if (event.target === this || event.target === this.firstElementChild) {
+      $('.cp-linha-vigencias > li').removeClass('active')
+    }
+  })
+}
+
 export default {
   SetCookie,
   ReadCookie,
   insertWaitAjax,
+  InitViewTAs,
   DispositivoSearch
 }
