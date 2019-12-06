@@ -32,41 +32,40 @@ new Vue({
     },
 
     created() {
-      this.debouncepesquisaParlamentar = _.debounce(this.pesquisaParlamentar, 200)
+      this.debouncepesquisaParlamentar = _.debounce(this.pesquisaParlamentar, 300)
     },
 
     methods: {
       getParlamentares(event) {
         console.log("asd")
         if (this.legislatura_selecionada){
-          axios.get('/parlamentar/get_parlamentare_by_legislaturas_json/'+this.legislatura_selecionada)
+          axios.get('/api/parlamentares/parlamentar/' + this.legislatura_selecionada + '/parlamentares_by_legislatura/')
           .then(response => {
-            console.log(response.data['parlamentares'][0])
-            this.parlamentares = response.data['parlamentares']
+            console.log(response)
+            this.parlamentares = response.data
           })
           .catch(err => {
             // Do something for an error here
-            console.log(err)
             console.error("Ocorreu um erro ao pegar os dados de parlamentares")
           })
         }
       },
 
       pesquisaParlamentar(event){
-        var bodyFormData = new FormData();
-        bodyFormData.set('nome', this.nome_pesquisa);
+        var data = {'nome_parlamentar':this.nome_pesquisa};
         
         axios({
           method: 'post',
-          url: '/parlamentar/search_parlamentare_json/',
-          data: bodyFormData,
-          config: { headers: {'Content-Type': 'multipart/form-data' }}
+          url: '/api/parlamentares/parlamentar/search_parlamentares/',
+          data: data,
+          config: { headers: {'Content-Type': 'application/json'}}
           })
           .then((response) => {
-              this.parlamentares = response.data['parlamentares']
+            console.log(response.data)  
+            this.parlamentares = response.data
           })
           .catch(function (response) {
-              console.log(response);
+              console.error("Erro ao procurar parlamentar:" + response);
           });
       },
 
@@ -79,23 +78,22 @@ new Vue({
           this.getParlamentares()    
         }
       }
-
     },
 
     mounted (){
-      axios.get('/parlamentar/get-all-legislaturas_json/')
+      axios.get('/api/parlamentares/legislatura/')
         .then(response => {
-          console.log(response)
-          this.legislaturas = response.data.legislaturas
-          this.legislatura_selecionada =  response.data.legislaturas[0][0]
+          console.log(response.data.results)
+          this.legislaturas = response.data.results
+          this.legislatura_selecionada =  response.data.results[0].id
         })
         .then(response => {
           this.getParlamentares()
+          console.log(this.parlamentares)
         })
         .catch(err => {
           // Do something for an error here
-          console.log(err)
-          console.error("Ocorreu um erro ao pegar os dados de legislação")
+          console.error("Ocorreu um erro ao pegar os dados de legislação: " + err)
         })
     }
   }) 
