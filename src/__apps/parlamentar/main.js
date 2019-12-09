@@ -9,8 +9,6 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 Vue.use(FormSelectPlugin)
 
-var legislaturas = []
-
 new Vue({
     delimiters: ['[[', ']]'],
     el: '#app2',
@@ -37,36 +35,27 @@ new Vue({
 
     methods: {
       getParlamentares(event) {
-        console.log("asd")
         if (this.legislatura_selecionada){
           axios.get('/api/parlamentares/parlamentar/' + this.legislatura_selecionada + '/parlamentares_by_legislatura/')
           .then(response => {
-            console.log(response)
             this.parlamentares = response.data
           })
           .catch(err => {
-            // Do something for an error here
-            console.error("Ocorreu um erro ao pegar os dados de parlamentares")
+            console.error("Ocorreu um erro ao obter os dados de parlamentares:" + response)
           })
         }
       },
 
       pesquisaParlamentar(event){
-        var data = {'nome_parlamentar':this.nome_pesquisa};
-        
-        axios({
-          method: 'post',
-          url: '/api/parlamentares/parlamentar/search_parlamentares/',
-          data: data,
-          config: { headers: {'Content-Type': 'application/json'}}
-          })
-          .then((response) => {
-            console.log(response.data)  
-            this.parlamentares = response.data
-          })
-          .catch(function (response) {
-              console.error("Erro ao procurar parlamentar:" + response);
-          });
+        axios.get('/api/parlamentares/parlamentar/search_parlamentares/', {
+          params: {'nome_parlamentar':this.nome_pesquisa}
+        })
+        .then(response => {
+          this.parlamentares = response.data
+        })
+        .catch(error => {
+          console.error("Erro ao procurar parlamentar:" + error);
+        })
       },
 
       pesquisaChange(event){
@@ -83,17 +72,14 @@ new Vue({
     mounted (){
       axios.get('/api/parlamentares/legislatura/')
         .then(response => {
-          console.log(response.data.results)
           this.legislaturas = response.data.results
           this.legislatura_selecionada =  response.data.results[0].id
         })
         .then(response => {
           this.getParlamentares()
-          console.log(this.parlamentares)
         })
         .catch(err => {
-          // Do something for an error here
-          console.error("Ocorreu um erro ao pegar os dados de legislação: " + err)
+          console.error("Ocorreu um erro ao obter os dados de legislação: " + err)
         })
     }
   }) 
