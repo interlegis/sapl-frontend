@@ -134,6 +134,10 @@ module.exports = {
       .add('./src/__apps/painel/main.js')
       .end()
 
+    config.entry('sessao')
+      .add('./src/__apps/sessao/main.js')
+      .end()
+
     config.entry('online')
       .add('./src/main.js')
       .end()
