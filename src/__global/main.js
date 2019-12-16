@@ -42,7 +42,7 @@ window.$ = $
 window.jQuery = $
 
 window.moment = moment
-
+window.proposicaoModal()
 window.autorModal()
 window.refreshMask()
 window.refreshDatePicker()
