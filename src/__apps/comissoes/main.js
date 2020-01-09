@@ -10,12 +10,12 @@ Vue.use(FormSelectPlugin)
 
 new Vue({
   delimiters: ['[[', ']]'],
-  el: '#app3',
+  el: '#composicao_list',
   data () {
     return {
         periodo_list: [],
-        comissao_id: '',
         parlamentares: [],
+        comissao_id: '',
         composicao_id: '',
     }
   },
@@ -27,19 +27,37 @@ new Vue({
           .then(response => {
             this.parlamentares = response.data.results
           })
-          .then(response => {
-            this.parlamentares.map((parlamentar) => {
-                console.log(parlamentar)
+          .then(() => {
+            const parlamentaresMap = this.parlamentares.map((parlamentar) => {
                 axios.get('/api/parlamentares/parlamentar/' + parlamentar.parlamentar)
                 .then(response => {
                     parlamentar.nome = response.data.__str__
-                    // console.log(response.data)
                 })
-                axios.get('/api/comissoes/cargocomissao/' + parlamentar.cargo)
-                .then(response => {
-                    parlamentar.cargo = response.data.nome
+                .then(() => { 
+                    axios.get('/api/comissoes/cargocomissao/' + parlamentar.cargo)
+                    .then(response => {
+                        parlamentar.cargo = response.data.nome
+                    })
+                    .then(() => {
+                        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+                        if (parlamentar.data_designacao) {
+                            var data_designacao = new Date(parlamentar.data_designacao + ' EDT').toLocaleDateString("pt-BR", options)
+                            parlamentar.data_designacao = data_designacao
+                        }
+                        if (parlamentar.data_desligamento) {
+                            var data_desligamento = new Date(parlamentar.data_desligamento + ' EDT').toLocaleDateString("pt-BR", options)
+                            parlamentar.data_desligamento = data_desligamento
+                        }
+                        if (parlamentar.titular) {
+                            parlamentar.titular = 'Sim'
+                        } else {
+                            parlamentar.titular = 'Não'
+                        }
+
+                    })
                 })
             })
+            Promise.all(parlamentaresMap)
           })
           .catch(error => {
             console.error('Ocorreu um erro ao obter os dados de parlamentares:' + error)
@@ -50,15 +68,14 @@ new Vue({
   },   
 
   mounted () {
-    // Identifica id da comissao
+    // Identifica id da comissao pela url
     this.comissao_id = window.location.pathname.split('/')[2]
 
-    // Pega periodos da comissao
+    // Requisita periodos da comissao
     axios.get('/api/comissoes/composicao/?comissao=' + this.comissao_id)
       .then(response => {
         this.periodo_list = response.data.results
         this.composicao_id = response.data.results[0].id
-        console.log(this.composicao_id)
         this.getParlamentares()
       })
       .catch(err => {
