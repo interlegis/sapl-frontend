@@ -17,7 +17,8 @@ new Vue({
       is_pesquisa: false,
       legislatura_selecionada: '',
       legislaturas: [],
-      parlamentares: []
+      parlamentares: [],
+      filter_ativo: '',
     }
   },
 
@@ -58,6 +59,7 @@ new Vue({
 
     pesquisaChange (event) {
       this.is_pesquisa = !this.is_pesquisa
+      this.filter_ativo = false
       if (this.is_pesquisa) {
         this.parlamentares = []
       } else {
