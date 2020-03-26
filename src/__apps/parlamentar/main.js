@@ -19,6 +19,7 @@ new Vue({
       legislaturas: [],
       parlamentares: [],
       filter_ativo: '',
+      filter_titular: ''
     }
   },
 
