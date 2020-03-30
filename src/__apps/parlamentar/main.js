@@ -18,6 +18,8 @@ new Vue({
       legislatura_selecionada: '',
       legislaturas: [],
       parlamentares: [],
+      visible_parlamentares: [],
+      size_parlamentares: 0,
       filter_ativo: '',
       filter_titular: ''
     }
@@ -39,6 +41,8 @@ new Vue({
         axios.get('/api/parlamentares/parlamentar/' + this.legislatura_selecionada + '/parlamentares_by_legislatura/')
           .then(response => {
             this.parlamentares = response.data
+            this.visible_parlamentares = this.parlamentares;
+            this.size_parlamentares = this.visible_parlamentares.length
           })
           .catch(error => {
             console.error('Ocorreu um erro ao obter os dados de parlamentares:' + error)
@@ -52,10 +56,23 @@ new Vue({
       })
         .then(response => {
           this.parlamentares = response.data
+          this.visible_parlamentares = this.parlamentares;  
+          this.size_parlamentares = this.visible_parlamentares.length
         })
         .catch(error => {
           console.error('Erro ao procurar parlamentar:' + error)
         })
+    },
+
+    checkTitularAtivo (event){
+      this.visible_parlamentares = this.parlamentares;  
+      if(this.filter_ativo){
+        this.visible_parlamentares = this.visible_parlamentares.filter((v) => v.ativo);
+      }
+      if(this.filter_titular){
+        this.visible_parlamentares = this.visible_parlamentares.filter((v) => v.titular=='Sim');
+      }
+      this.size_parlamentares = this.visible_parlamentares.length
     },
 
     pesquisaChange (event) {
@@ -71,15 +88,15 @@ new Vue({
 
   mounted () {
     axios.get('/api/parlamentares/legislatura/')
-      .then(response => {
-        this.legislaturas = response.data.results
-        this.legislatura_selecionada = response.data.results[0].id
-      })
-      .then(response => {
-        this.getParlamentares()
-      })
-      .catch(err => {
-        console.error('Ocorreu um erro ao obter os dados de legislação: ' + err)
-      })
+    .then(response => {
+      this.legislaturas = response.data.results
+      this.legislatura_selecionada = response.data.results[0].id
+    })
+    .then(response => {
+      this.getParlamentares()
+    })
+    .catch(err => {
+      console.error('Ocorreu um erro ao obter os dados de legislação: ' + err)
+    })
   }
 })
