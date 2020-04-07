@@ -50,6 +50,8 @@ verifica_diretorio "sapl"
 
 BRANCH_BACKEND="$(retorna_branch "BRANCH_BACKEND")"
 
+cd ../sapl-frontend > /dev/null 2>&1
+
 if [[ "$BRANCH_FRONTEND" == "$BRANCH_BACKEND" ]]; then
   echo -e "\033[33mEXECUTANDO\033[0m  \033[1myarn run $1\033[1m."
   yarn run "$1"
