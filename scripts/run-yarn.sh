@@ -29,6 +29,9 @@ retorna_branch() {
   fi
 }
 
+
+cd ..
+
 if [[ ! (( "$1" == "build" ) || ( "$1" == "serve" )) ]]; then
   echo -e "\033[31mERRO\033[0m  Parâmetro inválido!"
   echo -e "      Coloque \033[1mbuild\033[0m ou \033[1mserve\033[0m."
