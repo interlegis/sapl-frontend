@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2063
+# shellcheck disable=SC2086
 # shellcheck disable=SC2164
 
 verifica_git() {
-  if [[ ! -d ".git" ]]; then
-    echo -e "\033[31mERRO\033[0m  Diretório atual não é um repositório git!"
+  if [[ ! -d $ROOT_DIR/sapl-frontend/.git ]]; then
+    echo -e "\033[31mERRO\033[0m  Diretório \033[1msapl-frontend\033[0m não é um repositório git!"
+    exit 1
+  elif [[ ! -d $ROOT_DIR/sapl/.git ]]; then
+    echo -e "\033[31mERRO\033[0m  Diretório \033[1msapl\033[0m não é um repositório git!"
     exit 1
   fi
 }
 
-verifica_sapl() {
-  if ! cd ../sapl &>/dev/null; then
+verifica_diretorios_sapl() {
+  if [[ ! -d $ROOT_DIR/sapl ]]; then
     echo -e "\033[31mERRO\033[0m  Os diretórios \033[1msapl\033[0m e \033[1msapl-frontend\033[0m devem ter o mesmo diretório raiz."
     exit 1
   else
@@ -39,11 +44,11 @@ adiciona_commit() {
 }
 
 
-# sapl-frontend/scripts/
-cd ..
+ROOT_DIR=${PWD%/sapl-frontend/scripts}
+
 # sapl-frontend/
-verifica_git
-verifica_sapl
+verifica_diretorios_sapl
+
 # sapl/
 salva_wip
 atualiza_branch "master"
