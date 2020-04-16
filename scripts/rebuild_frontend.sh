@@ -43,8 +43,8 @@ adiciona_commit() {
   git push origin "$1"
 }
 
-
-ROOT_DIR=${PWD%/sapl-frontend/scripts}
+BASE_DIR=${PWD%/scripts}
+ROOT_DIR=${BASE_DIR%/sapl-frontend}
 
 # sapl-frontend/
 verifica_diretorios_sapl
