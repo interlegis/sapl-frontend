@@ -22,26 +22,32 @@ verifica_diretorios_sapl() {
   fi
 }
 
-salva_wip() {
+salva_wip() {(
+  cd $ROOT_DIR/$1
   git add .
   git stash
-}
+)}
 
-restaura_wip() {
-  git stash pop
-  git reset HEAD .
-}
+atualiza_branch() {(
+  cd $ROOT_DIR/$1
+  git checkout $2
+  git pull origin $2 --rebase
+)}
 
-atualiza_branch() {
-  git checkout "$1"
-  git pull origin "$1" --rebase
-}
-
-adiciona_commit() {
+adiciona_commit() {(
+  cd $ROOT_DIR/sapl
   git add .
   git commit -m "Rebuild Frontend"
-  git push origin "$1"
-}
+  git push origin $1
+)}
+
+restaura_wip() {(
+  cd $ROOT_DIR/$1
+  git checkout $2
+  git stash pop
+  git restore --staged .
+)}
+
 
 BASE_DIR=${PWD%/scripts}
 ROOT_DIR=${BASE_DIR%/sapl-frontend}
