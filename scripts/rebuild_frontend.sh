@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2063
+# shellcheck disable=SC2068
 # shellcheck disable=SC2086
 # shellcheck disable=SC2164
 
@@ -52,32 +53,27 @@ restaura_wip() {(
 BASE_DIR=${PWD%/scripts}
 ROOT_DIR=${BASE_DIR%/sapl-frontend}
 
-# sapl-frontend/
 verifica_diretorios_sapl
+OLD_FRONTEND_BRANCH=$(git branch | grep '^*' | cut -d ' ' -f2)
+OLD_BACKEND_BRANCH=$(cd $ROOT_DIR/sapl && git branch | grep '^*' | cut -d ' ' -f2)
 
-# sapl/
-salva_wip
-atualiza_branch "master"
-cd -
-# sapl-frontend/
-salva_wip
-atualiza_branch "master"
-./run-yarn.sh build
-cd -
-# sapl/
-adiciona_commit "master"
-git checkout -
-atualiza_branch "3.1.x"
-cd -
-# sapl-frontend/
-git checkout -
-atualiza_branch "3.1.x"
-./run-yarn.sh build
-git checkout -
-restaura_wip
-cd -
-# sapl/
-adiciona_commit "3.1.x"
-git checkout -
-restaura_wip
-cd ../sapl-frontend/scripts
+BRANCHS=("3.1.x" "master")
+REPOS=("sapl-frontend" "sapl")
+
+for REPO in ${REPOS[@]}; do
+  salva_wip $REPO &>/dev/null
+done
+wait
+
+for BRANCH in ${BRANCHS[@]}; do
+  for REPO in ${REPOS[@]}; do
+    atualiza_branch $REPO $BRANCH &>/dev/null
+  done
+  wait
+  ./run-yarn.sh build
+  adiciona_commit $BRANCH
+done
+
+restaura_wip "sapl-frontend" $OLD_FRONTEND_BRANCH &>/dev/null
+restaura_wip "sapl" $OLD_BACKEND_BRANCH &>/dev/null
+wait
