@@ -4,7 +4,6 @@ const each = require('lodash/fp/each')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const BundleTrackerPlugin = require('webpack-bundle-tracker')
 const CompressionPlugin = require('compression-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
 
 class RelativeBundleTrackerPlugin extends BundleTrackerPlugin {
   convertPathChunks (chunks) {
@@ -55,10 +54,14 @@ module.exports = {
       }])
 
     if (process.env.NODE_ENV === 'production') {
-      config
-        .optimization
-        .minimizer()
-        .use(TerserPlugin)
+      config.optimization.minimizer('terser').tap((args) => {
+        args[0].terserOptions.compress.pure_funcs = ['console.info', 'console.debug', 'console.warn', 'console.error']
+        args[0].terserOptions.compress.drop_console = true
+        args[0].extractComments = true
+        args[0].cache = true
+
+        return args
+      })
 
       config
         .plugin('CompressionPlugin')
