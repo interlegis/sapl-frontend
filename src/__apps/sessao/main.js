@@ -133,9 +133,7 @@ const lista_discurso_app = new Vue({ // eslint-disable-line
           sessao_pk: sessao_pk
         }, function (data, status) {
           if (status === 'success') {
-            /* eslint-disable no-console */
             console.log('Salvo.')
-            /* eslint-enable no-console */
           }
         })
     },
@@ -155,9 +153,7 @@ const lista_discurso_app = new Vue({ // eslint-disable-line
           sessao_pk: sessao_pk
         }, function (data, status) {
           if (status === 'success') {
-            /* eslint-disable no-console */
             console.log('Orador Salvo.')
-            /* eslint-enable no-console */
           }
         })
     },

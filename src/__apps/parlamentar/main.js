@@ -45,9 +45,7 @@ const v = new Vue({ //eslint-disable-line
             this.size_parlamentares = this.visible_parlamentares.length
           })
           .catch(error => {
-            /* eslint-disable no-console */
             console.error('Ocorreu um erro ao obter os dados de parlamentares:' + error)
-            /* eslint-enable no-console */
           })
       }
     },
@@ -62,9 +60,7 @@ const v = new Vue({ //eslint-disable-line
           this.size_parlamentares = this.visible_parlamentares.length
         })
         .catch(error => {
-          /* eslint-disable no-console */
           console.error('Erro ao procurar parlamentar:' + error)
-          /* eslint-enable no-console */
         })
     },
 
@@ -100,9 +96,7 @@ const v = new Vue({ //eslint-disable-line
         this.getParlamentares()
       })
       .catch(err => {
-        /* eslint-disable no-console */
         console.error('Ocorreu um erro ao obter os dados de legislação: ' + err)
-        /* eslint-enable no-console */
       })
   }
 })
