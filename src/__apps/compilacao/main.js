@@ -13,8 +13,6 @@ _.forEach(_.merge(_.merge(compilacao, compilacaoNotas), compilacaoView), functio
 })
 
 $(document).ready(function () {
-  
-
   window.InitViewTAs()
   window.onReadyNotasVides()
 })
