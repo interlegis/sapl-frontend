@@ -1,8 +1,8 @@
-let _$ = window.$
+const _$ = window.$
 
 function SetCookie (cookieName, cookieValue, nDays) {
-  let today = new Date()
-  let expire = new Date()
+  const today = new Date()
+  const expire = new Date()
   if (nDays === null || nDays === 0) nDays = 1
   expire.setTime(today.getTime() + 3600000 * 24 * nDays)
   document.cookie = cookieName + '=' + escape(cookieValue) +
@@ -10,7 +10,7 @@ function SetCookie (cookieName, cookieValue, nDays) {
 }
 
 function ReadCookie (cookieName) {
-  let theCookie = ' ' + document.cookie
+  const theCookie = ' ' + document.cookie
   let ind = theCookie.indexOf(' ' + cookieName + '=')
   if (ind === -1) ind = theCookie.indexOf(';' + cookieName + '=')
   if (ind === -1 || cookieName === '') return ''
@@ -34,16 +34,16 @@ function DispositivoSearch (opts) {
     containerDs = _$('<div id="container_ds"/>')
     _$('body').prepend(containerDs)
 
-    let fields = _$('[data-sapl-ta="DispositivoSearch"]')
+    const fields = _$('[data-sapl-ta="DispositivoSearch"]')
     fields.each(function () {
-      let field = _$(this)
-      let dataTypeSelection = field.attr('data-type-selection')
-      let dataField = field.attr('data-field')
-      let dataFunction = field.attr('data-function')
+      const field = _$(this)
+      const dataTypeSelection = field.attr('data-type-selection')
+      const dataField = field.attr('data-field')
+      const dataFunction = field.attr('data-function')
 
-      let onChangeFieldSelects = function (event) {
+      const onChangeFieldSelects = function (event) {
         if (dataTypeSelection === 'checkbox') {
-          let tas = field.find('input[name="ta_select_all"]') // tas - Textos Articulados
+          const tas = field.find('input[name="ta_select_all"]') // tas - Textos Articulados
           tas.off()
 
           tas.on('change', function (event) {
@@ -51,7 +51,7 @@ function DispositivoSearch (opts) {
             // _$(this).prop('checked', false)
           })
         } else {
-          let dpts = field.find('input')
+          const dpts = field.find('input')
           dpts.off()
           dpts.attr('type', 'hidden')
           _$('<a class="text-danger">')
@@ -68,15 +68,15 @@ function DispositivoSearch (opts) {
       }
       onChangeFieldSelects()
 
-      let onChangeParamTA = function (event) {
-        let tipoTa = _$('select[name="tipo_ta"]').val()
-        let tipoModel = _$('select[name="tipo_model"]').val()
-        let numTa = _$('input[name="num_ta"]').val()
-        let anoTa = _$('input[name="ano_ta"]').val()
+      const onChangeParamTA = function (event) {
+        const tipoTa = _$('select[name="tipo_ta"]').val()
+        const tipoModel = _$('select[name="tipo_model"]').val()
+        const numTa = _$('input[name="num_ta"]').val()
+        const anoTa = _$('input[name="ano_ta"]').val()
         let tipoResultado = _$('input[name="tipo_resultado"]:checked').val()
-        let rotuloDispositivo = _$('input[name="rotulo_dispositivo"]').val()
-        let textoDispositivo = _$('input[name="texto_dispositivo"]').val()
-        let maxResults = _$('select[name="max_results"]').val()
+        const rotuloDispositivo = _$('input[name="rotulo_dispositivo"]').val()
+        const textoDispositivo = _$('input[name="texto_dispositivo"]').val()
+        const maxResults = _$('select[name="max_results"]').val()
         let url = ''
 
         if (rotuloDispositivo.length > 0 || textoDispositivo.length > 0) {
@@ -96,17 +96,17 @@ function DispositivoSearch (opts) {
           tipoResultado = 'False'
         }
         formData = {
-          'tipo_ta': tipoTa,
-          'tipo_model': tipoModel,
-          'num_ta': numTa,
-          'ano_ta': anoTa,
-          'texto': textoDispositivo,
-          'rotulo': rotuloDispositivo,
-          'tipo_resultado': tipoResultado,
-          'max_results': maxResults,
-          'data_type_selection': dataTypeSelection,
-          'data_field': dataField,
-          'data_function': dataFunction
+          tipo_ta: tipoTa,
+          tipo_model: tipoModel,
+          num_ta: numTa,
+          ano_ta: anoTa,
+          texto: textoDispositivo,
+          rotulo: rotuloDispositivo,
+          tipo_resultado: tipoResultado,
+          max_results: maxResults,
+          data_type_selection: dataTypeSelection,
+          data_field: dataField,
+          data_function: dataFunction
         }
 
         window.localStorage.setItem('dispositivo_search_form_data', JSON.stringify(formData))
@@ -118,7 +118,7 @@ function DispositivoSearch (opts) {
           _$('.result-busca-dispositivo').html(data)
           // OptionalCustomFrontEnd().init()
           if (dataTypeSelection === 'checkbox') {
-            let tas = _$('.result-busca-dispositivo').find('input[name="ta_select_all"]')
+            const tas = _$('.result-busca-dispositivo').find('input[name="ta_select_all"]')
             tas.off()
             tas.on('change', function (event) {
               _$(this).closest('ul').find('input[name="' + dataField + '"]').prop('checked', this.checked)
@@ -127,9 +127,9 @@ function DispositivoSearch (opts) {
         })
       }
 
-      let onKeyPressRotuloBuscaTextual = function (event) {
-        let rotuloDispositivo = _$('input[name="rotulo_dispositivo"]').val()
-        let textoDispositivo = _$('input[name="texto_dispositivo"]').val()
+      const onKeyPressRotuloBuscaTextual = function (event) {
+        const rotuloDispositivo = _$('input[name="rotulo_dispositivo"]').val()
+        const textoDispositivo = _$('input[name="texto_dispositivo"]').val()
         // let tipoResultado = _$('input[name="tipo_resultado"]:checked').val()
 
         if (rotuloDispositivo.length > 0 || textoDispositivo.length > 0) {
@@ -156,15 +156,15 @@ function DispositivoSearch (opts) {
       buttonDs = _$('<div id="buttonDs" class="clearfix"/>')
       field.prepend(buttonDs)
 
-      let btnOpenSearch = _$('<button>')
-        .text(opts['text_button'])
+      const btnOpenSearch = _$('<button>')
+        .text(opts.text_button)
         .attr('type', 'button')
         .attr('class', 'btn btn-sm btn-success btn-modal-open')
       buttonDs.append(btnOpenSearch)
       btnOpenSearch.on('click', function () {
-        _$.get(opts['url_form'], function (data) {
+        _$.get(opts.url_form, function (data) {
           containerDs.html(data)
-          let modalDs = _$('#modal-ds')
+          const modalDs = _$('#modal-ds')
           // OptionalCustomFrontEnd().init()
 
           modalDs.find('select[name="tipo_ta"]').change(function (event) {
@@ -172,14 +172,14 @@ function DispositivoSearch (opts) {
             url = '/ta/search_fragment_form?action=get_tipos&tipo_ta=' + this.value
             modalDs.find('label[for="id_tipo_model"]').html('Tipos de ' + this.children[this.selectedIndex].innerHTML)
 
-            let select = modalDs.find('select[name="tipo_model"]')
+            const select = modalDs.find('select[name="tipo_model"]')
             select.empty()
             _$('<option value="">Carregando...</option>').appendTo(select)
 
             _$.get(url).done(function (data) {
               select.empty()
-              for (let item in data) {
-                for (let i in data[item]) {
+              for (const item in data) {
+                for (const i in data[item]) {
                   select.append(_$('<option>').attr('value', i).text(data[item][i]))
                 }
               }
@@ -205,26 +205,26 @@ function DispositivoSearch (opts) {
 
           modalDs.find('#btn-modal-select').click(function () {
             // limpar selecionados se o tipo é radio
-            let listas = field.find('ul')
+            const listas = field.find('ul')
             if (dataTypeSelection === 'radio') {
               listas.remove()
             }
             // adicionar itens selecionados na caixa modal
-            let selecionados = modalDs.find('[name="' + dataField + '"]:checked')
+            const selecionados = modalDs.find('[name="' + dataField + '"]:checked')
 
             // com base nos selecionados, limpa seus ta's removendo os não selecionados
             selecionados.closest('ul').find('input:not(:checked)').filter('[name!="ta_select_all"]').closest('li').remove()
 
             selecionados.closest('ul').each(function () {
               // insere na lista de selecionados os ta's não presentes
-              let ulLista = field.find('#' + this.id)
+              const ulLista = field.find('#' + this.id)
               if (ulLista.length === 0) {
                 field.append(this)
                 return
               }
 
               // insere os dispositivos não presentes
-              let inputForThis = _$(this).find('input')
+              const inputForThis = _$(this).find('input')
 
               inputForThis.each(function () {
                 if (ulLista.find('#' + this.id).length > 0) {
@@ -239,7 +239,7 @@ function DispositivoSearch (opts) {
             modalDs.modal('hide')
 
             if ('post_selected' in opts) {
-              opts['post_selected'](opts['params_post_selected'])
+              opts.post_selected(opts.params_post_selected)
             }
           })
 
@@ -272,7 +272,7 @@ function DispositivoSearch (opts) {
           modalDs.modal('show')
         })
       })
-      if ('autostart' in opts && opts['autostart']) {
+      if ('autostart' in opts && opts.autostart) {
         btnOpenSearch.trigger('click')
       }
     })

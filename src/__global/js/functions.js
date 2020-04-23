@@ -8,14 +8,14 @@ window.removeTinymce = function () {
 
 window.initTextRichEditor = function (elements, readonly = false) {
   window.removeTinymce()
-  let configTinymce = {
-    'force_br_newlines': false,
-    'force_p_newlines': false,
-    'forced_root_block': '',
-    'content_style': skinTinymce.contentStyle,
-    'skin': false,
-    'plugins': ['lists table code'],
-    'menubar': 'file edit view format table tools',
+  const configTinymce = {
+    force_br_newlines: false,
+    force_p_newlines: false,
+    forced_root_block: '',
+    content_style: skinTinymce.contentStyle,
+    skin: false,
+    plugins: ['lists table code'],
+    menubar: 'file edit view format table tools',
     toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
     min_height: 200
 
@@ -28,10 +28,10 @@ window.initTextRichEditor = function (elements, readonly = false) {
   }
 
   if (elements != null) {
-    configTinymce['elements'] = elements
-    configTinymce['mode'] = 'exact'
+    configTinymce.elements = elements
+    configTinymce.mode = 'exact'
   } else {
-    configTinymce['mode'] = 'textareas'
+    configTinymce.mode = 'textareas'
   }
   skinTinymce.use()
   window.tinymce.init(configTinymce)
@@ -41,7 +41,7 @@ window.refreshDatePicker = function () {
   $.datepicker.setDefaults($.datepicker.regional['pt-BR'])
   $('.dateinput').datepicker()
 
-  let dateinput = document.querySelectorAll('.dateinput')
+  const dateinput = document.querySelectorAll('.dateinput')
   _.each(dateinput, function (input, index) {
     input.setAttribute('autocomplete', 'off')
   })
@@ -144,9 +144,9 @@ window.autorModal = function () {
         }
 
         $('#selecionar').click(function () {
-          let res = $('#resultados option:selected')
-          let id = res.val()
-          let nome = res.text()
+          const res = $('#resultados option:selected')
+          const id = res.val()
+          const nome = res.text()
 
           $('#nome_autor').text(nome)
 

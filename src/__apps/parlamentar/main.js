@@ -52,7 +52,7 @@ const v = new Vue({ // eslint-disable-line
 
     pesquisaParlamentar (event) {
       axios.get('/api/parlamentares/parlamentar/search_parlamentares/', {
-        params: { 'nome_parlamentar': this.nome_pesquisa }
+        params: { nome_parlamentar: this.nome_pesquisa }
       })
         .then(response => {
           this.parlamentares = response.data

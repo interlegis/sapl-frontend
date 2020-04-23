@@ -12,6 +12,7 @@ class RelativeBundleTrackerPlugin extends BundleTrackerPlugin {
       chunk.path = path.relative(this.options.path, chunk.path)
     }))(chunks)
   }
+
   writeOutput (compiler, contents) {
     if (contents.status === 'done') {
       this.convertPathChunks(contents.chunks)
@@ -75,7 +76,7 @@ module.exports = {
       .use('vue-loader')
       .loader('vue-loader')
       .tap(options => {
-        options['transformAssetUrls'] = {
+        options.transformAssetUrls = {
           img: 'src',
           image: 'xlink:href',
           'b-img': 'src',

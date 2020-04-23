@@ -1,12 +1,12 @@
-let _$ = window.$
-let JsDiff = require('diff')
+const _$ = window.$
+const JsDiff = require('diff')
 
 function isElementInViewport (el) {
   if (typeof jQuery === 'function' && el instanceof jQuery) {
     el = el[0]
   }
 
-  let rect = el.getBoundingClientRect()
+  const rect = el.getBoundingClientRect()
 
   return (
     rect.top >= 0 &&
@@ -19,7 +19,7 @@ function isElementInViewport (el) {
 
 function textoMultiVigente (item, diff) {
   let elv = null
-  let ldpts = _$('.dptt')
+  const ldpts = _$('.dptt')
   for (let i = 0; i < ldpts.length; i++) {
     if (_$(ldpts[i]).hasClass('displaynone')) continue
     if (isElementInViewport(ldpts[i])) {
@@ -48,28 +48,28 @@ function textoMultiVigente (item, diff) {
         return
       }
 
-      let pk = _$(this).attr('pk')
-      let pks = _$(this).attr('pks')
+      const pk = _$(this).attr('pk')
+      const pks = _$(this).attr('pks')
 
-      let a = _$('#d' + pks)
+      const a = _$('#d' + pks)
         .contents()
         .filter(function () {
           return this.nodeType === Node.TEXT_NODE
         })
-      let b = _$('#da' + pk)
+      const b = _$('#da' + pk)
         .contents()
         .filter(function () {
           return this.nodeType === Node.TEXT_NODE
         })
 
-      let diff = JsDiff.diffWordsWithSpace(_$(a).text(), _$(b).text())
+      const diff = JsDiff.diffWordsWithSpace(_$(a).text(), _$(b).text())
 
       if (diff.length > 0) {
         _$('#d' + pks)
           .closest('.desativado')
           .addClass('displaynone')
 
-        let clone = _$('#da' + pk).clone()
+        const clone = _$('#da' + pk).clone()
         _$('#da' + pk).after(clone)
         _$('#da' + pk).addClass('displaynone')
         _$(clone)
@@ -79,7 +79,7 @@ function textoMultiVigente (item, diff) {
         diff.forEach(function (part) {
           // let color = part.added ? '#018' : part.removed ? '#faa' : ''
 
-          let span = document.createElement('span')
+          const span = document.createElement('span')
 
           let value = part.value
 
@@ -117,7 +117,7 @@ function textoMultiVigente (item, diff) {
 
 function textoVigente (item, link) {
   let elv = null
-  let ldpts = _$('.dptt')
+  const ldpts = _$('.dptt')
   for (let i = 0; i < ldpts.length; i++) {
     if (_$(ldpts[i]).hasClass('displaynone')) continue
     if (isElementInViewport(ldpts[i])) {

@@ -24,8 +24,8 @@ module.exports = {
   },
 
   globals: {
-    '$': true,
-    'jQuery': true,
-    '_': true
+    $: true,
+    jQuery: true,
+    _: true
   }
 }
