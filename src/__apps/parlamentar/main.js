@@ -8,7 +8,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 Vue.use(FormSelectPlugin)
 
-new Vue({
+const v = new Vue({ // eslint-disable-line
   delimiters: ['[[', ']]'],
   el: '#app2',
   data () {
@@ -41,7 +41,7 @@ new Vue({
         axios.get('/api/parlamentares/parlamentar/' + this.legislatura_selecionada + '/parlamentares_by_legislatura/')
           .then(response => {
             this.parlamentares = response.data
-            this.visible_parlamentares = this.parlamentares;
+            this.visible_parlamentares = this.parlamentares
             this.size_parlamentares = this.visible_parlamentares.length
           })
           .catch(error => {
@@ -56,7 +56,7 @@ new Vue({
       })
         .then(response => {
           this.parlamentares = response.data
-          this.visible_parlamentares = this.parlamentares;  
+          this.visible_parlamentares = this.parlamentares
           this.size_parlamentares = this.visible_parlamentares.length
         })
         .catch(error => {
@@ -64,13 +64,13 @@ new Vue({
         })
     },
 
-    checkTitularAtivo (event){
-      this.visible_parlamentares = this.parlamentares;  
-      if(this.filter_ativo){
-        this.visible_parlamentares = this.visible_parlamentares.filter((v) => v.ativo);
+    checkTitularAtivo (event) {
+      this.visible_parlamentares = this.parlamentares
+      if (this.filter_ativo) {
+        this.visible_parlamentares = this.visible_parlamentares.filter((v) => v.ativo)
       }
-      if(this.filter_titular){
-        this.visible_parlamentares = this.visible_parlamentares.filter((v) => v.titular=='Sim');
+      if (this.filter_titular) {
+        this.visible_parlamentares = this.visible_parlamentares.filter((v) => v.titular === 'Sim')
       }
       this.size_parlamentares = this.visible_parlamentares.length
     },
@@ -88,15 +88,15 @@ new Vue({
 
   mounted () {
     axios.get('/api/parlamentares/legislatura/')
-    .then(response => {
-      this.legislaturas = response.data.results
-      this.legislatura_selecionada = response.data.results[0].id
-    })
-    .then(response => {
-      this.getParlamentares()
-    })
-    .catch(err => {
-      console.error('Ocorreu um erro ao obter os dados de legislação: ' + err)
-    })
+      .then(response => {
+        this.legislaturas = response.data.results
+        this.legislatura_selecionada = response.data.results[0].id
+      })
+      .then(response => {
+        this.getParlamentares()
+      })
+      .catch(err => {
+        console.error('Ocorreu um erro ao obter os dados de legislação: ' + err)
+      })
   }
 })
