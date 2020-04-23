@@ -95,7 +95,7 @@ function DispositivoSearch (opts) {
           _$('input[name="tipo_resultado"]').closest('#div_id_tipo_resultado').css('opacity', '0.3')
           tipoResultado = 'False'
         }
-        formData = { 
+        formData = {
           'tipo_ta': tipoTa,
           'tipo_model': tipoModel,
           'num_ta': numTa,
@@ -254,7 +254,6 @@ function DispositivoSearch (opts) {
             _$('input[name="tipo_resultado"]')
               .filter(`[value="${formData.tipo_resultado}"]`)
               .attr('checked', true)
-
           } catch (e) {
             // console.log(e)
           }
@@ -274,7 +273,7 @@ function DispositivoSearch (opts) {
         })
       })
       if ('autostart' in opts && opts['autostart']) {
-        btnOpenSearch.trigger('click');
+        btnOpenSearch.trigger('click')
       }
     })
   })
