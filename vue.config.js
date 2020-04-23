@@ -4,7 +4,6 @@ const each = require('lodash/fp/each')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const BundleTrackerPlugin = require('webpack-bundle-tracker')
 const CompressionPlugin = require('compression-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
 
 class RelativeBundleTrackerPlugin extends BundleTrackerPlugin {
   convertPathChunks (chunks) {
