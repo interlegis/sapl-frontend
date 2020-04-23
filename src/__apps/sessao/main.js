@@ -133,7 +133,7 @@ const lista_discurso_app = new Vue({ // eslint-disable-line
           sessao_pk: sessao_pk
         }, function (data, status) {
           if (status === 'success') {
-            console.log('Salvo.')
+            console.info('Salvo.')
           }
         })
     },
@@ -153,7 +153,7 @@ const lista_discurso_app = new Vue({ // eslint-disable-line
           sessao_pk: sessao_pk
         }, function (data, status) {
           if (status === 'success') {
-            console.log('Orador Salvo.')
+            console.info('Orador Salvo.')
           }
         })
     },
