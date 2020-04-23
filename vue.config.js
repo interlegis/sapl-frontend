@@ -1,18 +1,19 @@
 const path = require('path')
 const each = require('lodash/fp/each')
 
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const BundleTrackerPlugin = require('webpack-bundle-tracker')
-const CompressionPlugin = require('compression-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 class RelativeBundleTrackerPlugin extends BundleTrackerPlugin {
-  convertPathChunks(chunks) {
+  convertPathChunks (chunks) {
     each(each(chunk => {
       chunk.path = path.relative(this.options.path, chunk.path)
     }))(chunks)
   }
-  writeOutput(compiler, contents) {
+
+  writeOutput (compiler, contents) {
     if (contents.status === 'done') {
       this.convertPathChunks(contents.chunks)
     }
@@ -26,7 +27,7 @@ dotenv.config({
   path: '../sapl/sapl/.env'
 })
 
-var FRONTEND_CUSTOM = process.env.FRONTEND_CUSTOM === undefined ? false : process.env.FRONTEND_CUSTOM === "True"
+var FRONTEND_CUSTOM = process.env.FRONTEND_CUSTOM === undefined ? false : process.env.FRONTEND_CUSTOM === 'True'
 
 var HOST_NAME = 'localhost'
 
@@ -47,20 +48,18 @@ module.exports = {
         filename: FRONTEND_CUSTOM ? './webpack-stats.json' : '../sapl/sapl/webpack-stats.json'
       }])
 
-
     config
       .plugin('MomentLocalesPlugin')
       .use(MomentLocalesPlugin, [{
-        localesToKeep: ['pt-BR'],
+        localesToKeep: ['pt-BR']
       }])
 
     if (process.env.NODE_ENV === 'production') {
-      
-
       config
         .optimization
-        .minimizer([new TerserPlugin()])
-        
+        .minimizer()
+        .use(TerserPlugin)
+
       config
         .plugin('CompressionPlugin')
         .use(CompressionPlugin, [{
@@ -78,7 +77,7 @@ module.exports = {
       .use('vue-loader')
       .loader('vue-loader')
       .tap(options => {
-        options['transformAssetUrls'] = {
+        options.transformAssetUrls = {
           img: 'src',
           image: 'xlink:href',
           'b-img': 'src',
@@ -141,10 +140,5 @@ module.exports = {
     config.entry('parlamentar')
       .add('./src/__apps/parlamentar/main.js')
       .end()
-        
-    config.entry('online')
-      .add('./src/main.js')
-      .end()
-
-  },
+  }
 }

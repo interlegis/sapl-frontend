@@ -1,5 +1,5 @@
 
-let _$ = window.$
+const _$ = window.$
 
 function onEventsDneExec (pk, model) {
   _$('html, body').animate({
@@ -24,8 +24,8 @@ function onEventsDneExec (pk, model) {
     })
   } else if (model === 'vide') {
     window.DispositivoSearch({
-      'url_form': '/ta/search_form',
-      'text_button': 'Definir Dispositivo'
+      url_form: '/ta/search_form',
+      text_button: 'Definir Dispositivo'
     })
   }
 }
@@ -72,11 +72,11 @@ function onSubmitEditNVForm (event) {
 }
 
 function onDelete (event) {
-  let model = _$(event).attr('model')
+  const model = _$(event).attr('model')
 
-  let idDispositivo = _$(event).closest('.dn').attr('pk')
-  let idDelete = _$(event).attr('pk')
-  let url = 'text/' + idDispositivo + '/' + model + '/' + idDelete + '/delete'
+  const idDispositivo = _$(event).closest('.dn').attr('pk')
+  const idDelete = _$(event).attr('pk')
+  const url = 'text/' + idDispositivo + '/' + model + '/' + idDelete + '/delete'
 
   _$.get(url, function (data) {
     _$('#dne' + idDispositivo + ' .dne-form').closest('.dpt').html(data)
@@ -86,7 +86,7 @@ function onDelete (event) {
 
 function getForm (_this) {
   let url = ''
-  let model = _$(_this).attr('model')
+  const model = _$(_this).attr('model')
   let idDispositivo = _$('.dne-nota .dne-form').closest('.dne').attr('pk')
   if (idDispositivo != null) {
     _$('#dne' + idDispositivo).removeClass('dne-nota')
@@ -97,7 +97,7 @@ function getForm (_this) {
     idDispositivo = _$(_this).attr('pk')
     url = 'text/' + idDispositivo + '/' + model + '/create'
   } else if (_this.className.indexOf('edit') >= 0) {
-    let idEdit = _$(_this).attr('pk')
+    const idEdit = _$(_this).attr('pk')
     idDispositivo = _$(_this).closest('.dn').attr('pk')
     url = 'text/' + idDispositivo + '/' + model + '/' + idEdit + '/edit'
   }

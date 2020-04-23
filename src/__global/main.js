@@ -30,10 +30,8 @@ import './scss/app.scss'
 import './js/image_cropping'
 import './js/functions'
 
-
 import * as moment from 'moment'
-import 'moment/locale/pt-br';
-
+import 'moment/locale/pt-br'
 
 // eslint-disable-next-line
 require('imports-loader?window.jQuery=jquery!./js/jquery.runner.js')
