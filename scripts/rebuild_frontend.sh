@@ -61,19 +61,19 @@ BRANCHS=("3.1.x" "master")
 REPOS=("sapl-frontend" "sapl")
 
 for REPO in ${REPOS[@]}; do
-  salva_wip $REPO &>/dev/null
+  salva_wip $REPO &>/dev/null &
 done
 wait
 
 for BRANCH in ${BRANCHS[@]}; do
   for REPO in ${REPOS[@]}; do
-    atualiza_branch $REPO $BRANCH &>/dev/null
+    atualiza_branch $REPO $BRANCH &>/dev/null &
   done
   wait
   ./run-yarn.sh build
   adiciona_commit $BRANCH
 done
 
-restaura_wip "sapl-frontend" $OLD_FRONTEND_BRANCH &>/dev/null
-restaura_wip "sapl" $OLD_BACKEND_BRANCH &>/dev/null
+restaura_wip "sapl-frontend" $OLD_FRONTEND_BRANCH &>/dev/null &
+restaura_wip "sapl" $OLD_BACKEND_BRANCH &>/dev/null &
 wait
