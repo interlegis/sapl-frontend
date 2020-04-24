@@ -55,17 +55,9 @@ module.exports = {
 
     if (process.env.NODE_ENV === 'production') {
       config.optimization.minimizer('terser').tap((args) => {
-        args[0].terserOptions.compress.pure_funcs = [
-          'console.info',
-          'console.debug',
-          'console.warn',
-          'console.log',
-          'console.error'
-        ]
         args[0].terserOptions.compress.drop_console = true
         args[0].extractComments = true
         args[0].cache = true
-
         return args
       })
 
