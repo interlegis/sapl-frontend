@@ -87,10 +87,10 @@ const v = new Vue({ // eslint-disable-line
   },
 
   mounted () {
-    axios.get('/api/parlamentares/legislatura/')
+    axios.get('/api/parlamentares/legislatura/?get_all=true')
       .then(response => {
-        this.legislaturas = response.data.results
-        this.legislatura_selecionada = response.data.results[0].id
+        this.legislaturas = response.data
+        this.legislatura_selecionada = response.data[0].id
       })
       .then(response => {
         this.getParlamentares()
