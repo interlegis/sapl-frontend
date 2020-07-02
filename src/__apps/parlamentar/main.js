@@ -20,7 +20,7 @@ const v = new Vue({ // eslint-disable-line
       parlamentares: [],
       visible_parlamentares: [],
       size_parlamentares: 0,
-      filter_ativo: '',
+      filter_ativo: true,
       filter_titular: ''
     }
   },
@@ -43,6 +43,7 @@ const v = new Vue({ // eslint-disable-line
             this.parlamentares = response.data
             this.visible_parlamentares = this.parlamentares
             this.size_parlamentares = this.visible_parlamentares.length
+            this.checkTitularAtivo()
           })
           .catch(error => {
             console.error('Ocorreu um erro ao obter os dados de parlamentares:' + error)
