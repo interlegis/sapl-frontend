@@ -20,7 +20,7 @@ const v = new Vue({ // eslint-disable-line
       parlamentares: [],
       visible_parlamentares: [],
       size_parlamentares: 0,
-      filter_ativo: true,
+      filter_ativo: false,
       filter_titular: ''
     }
   },
